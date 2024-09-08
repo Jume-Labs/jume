@@ -1,0 +1,42 @@
+[{
+	access: [APublic]
+	doc: null
+	kind: FProp(get, never, TPath({
+		name: MyService
+		pack: []
+		params: []
+		sub: null
+	}), null)
+	meta: [{
+		name: :inject
+		params: []
+		pos: #pos
+	}]
+	name: service
+	pos: #pos
+}, {
+	access: [APublic]
+	doc: null
+	kind: FFun({
+		args: []
+		expr: {
+			expr: EBlock([])
+			pos: #pos
+		}
+		params: []
+		ret: null
+	})
+	meta: []
+	name: new
+	pos: #pos
+}, {
+	access: null
+	doc: null
+	kind: null <- expected value
+	meta: null
+	name: null <- expected value
+	pos: null <- expected value
+}]
+line 35: expected value
+line 37: expected value
+line 38: expected value

@@ -1,0 +1,11 @@
+{
+  "name": "jume",
+  "version": "0.1.0",
+  "description": "2D game engine for the web",
+  "classPath": "src",
+  "license": "MIT",
+  "contributors": ["Codescapade"],
+  "releasenote": "",
+  "url": "https://github.com/jume-labs/jume",
+  "dependencies": {}
+}

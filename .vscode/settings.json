@@ -1,0 +1,16 @@
+{
+  "haxe.configurations": [
+    ["hxml/build.hxml"],
+    ["hxml/test.hxml"]
+  ],
+  "haxecheckstyle.sourceFolders": [
+    "src",
+    "tests"
+  ],
+  "haxeTestExplorer.testCommand": [
+    "${haxe}",
+    "hxml/test.hxml",
+    "-lib",
+    "test-adapter"
+  ]
+}

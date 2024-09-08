@@ -1,0 +1,2 @@
+--cmd haxelib run formatter -s src -s tests --check
+--cmd haxelib run checkstyle -s src -s tests --exitcode

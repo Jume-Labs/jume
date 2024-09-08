@@ -1,0 +1,157 @@
+{
+  "defaultSeverity": "INFO",
+  "checks": [
+    {
+      "type": "EmptyLines",
+      "props": {
+        "requireEmptyLineAfterClass": false,
+        "requireEmptyLineAfterInterface": false,
+        "requireEmptyLineAfterAbstract": false,
+        "max": 1,
+        "severity": "ERROR"
+      }
+    },
+    {
+      "type": "UnusedImport",
+      "props": {
+        "severity": "ERROR"
+      }
+    },
+    {
+      "type": "StringLiteral",
+      "props": {
+        "policy": "onlySingle",
+        "allowException": true,
+        "severity": "ERROR"
+      }
+    },
+    {
+      "type": "LeftCurly",
+      "props": {
+        "severity": "ERROR",
+        "option": "eol",
+        "ignoreEmptySingleline": true,
+        "tokens": [
+          "CLASS_DEF",
+          "ENUM_DEF",
+          "ABSTRACT_DEF",
+          "TYPEDEF_DEF",
+          "INTERFACE_DEF",
+          "FUNCTION",
+          "FOR",
+          "IF",
+          "WHILE",
+          "SWITCH",
+          "TRY",
+          "CATCH",
+          "ARRAY_COMPREHENSION"
+        ]
+      }
+    },
+    {
+      "type": "MultipleVariableDeclarations",
+      "props": {
+        "severity": "ERROR"
+      }
+    },
+    {
+      "type": "SimplifyBooleanReturn",
+      "props": {
+        "severity": "ERROR"
+      }
+    },
+    {
+      "type": "UnusedLocalVar",
+      "props": {
+        "severity": "ERROR"
+      }
+    },
+    {
+      "type": "Spacing",
+      "props": {
+        "severity": "ERROR",
+        "spaceIfCondition": "should",
+        "spaceForLoop": "should",
+        "spaceWhileLoop": "should",
+        "spaceSwitchCase": "should",
+        "spaceCatch": "should",
+        "spaceAroundBinop": true,
+        "noSpaceAroundUnop": true,
+        "ignoreRangeOperator": true
+      }
+    },
+    {
+      "type": "TrailingWhitespace",
+      "props": {
+        "severity": "ERROR"
+      }
+    },
+    {
+      "type": "RedundantModifier",
+      "props": {
+        "enforcePublicPrivate": false,
+        "enforcePublic": false,
+        "enforcePrivate": false,
+        "severity": "ERROR"
+      }
+    },
+    {
+      "type": "Final",
+      "props": {
+        "severity": "ERROR"
+      }
+    },
+    {
+      "type": "LineLength",
+      "props": {
+        "severity": "ERROR",
+        "max": 120
+      }
+    },
+    {
+      "type": "NeedBraces",
+      "props": {
+        "allowSingleLineStatement": true,
+        "tokens": ["FOR", "IF", "ELSE_IF", "WHILE", "DO_WHILE"],
+        "severity": "ERROR"
+      }
+    },
+    {
+      "type": "Return",
+      "props": {
+        "severity": "ERROR",
+        "allowEmptyReturn": true,
+        "enforceReturnType": false,
+        "enforceReturnTypeForAnonymous": false
+      }
+    },
+    {
+      "type": "NullableParameter",
+      "props": {
+        "option": "questionMark",
+        "severity": "ERROR"
+      }
+    },
+    {
+      "type": "VariableInitialisation",
+      "props": {
+        "severity": "ERROR",
+        "allowFinal": true
+      }
+    },
+    {
+      "type": "ParameterNumber",
+      "props": {
+        "severity": "WARNING",
+        "max": 4,
+        "ignoreOverriddenMethods": false
+      }
+    },
+    {
+      "type": "Final",
+      "props": {
+        "severity": "ERROR"
+      }
+    }
+  ]
+}

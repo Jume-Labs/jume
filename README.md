@@ -1,2 +1,2 @@
 # jume
-Web Game Engine written in Haxe
+2D game engine for the web.

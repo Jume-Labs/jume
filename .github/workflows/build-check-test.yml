@@ -1,0 +1,32 @@
+name: Check and Test
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: krdlab/setup-haxe@v1
+      with:
+        haxe-version: latest
+
+    - name: Configure Haxelib
+      run: |
+        haxelib setup /home/runner/haxe/haxelib/
+        haxelib install formatter
+        haxelib install checkstyle
+        haxelib install utest 1.13.2
+
+    - name: Linting
+      run: haxe hxml/lint.hxml
+
+    - name: Build
+      run: haxe hxml/build.hxml
+
+    - name: Tests
+      run: haxe hxml/test.hxml
