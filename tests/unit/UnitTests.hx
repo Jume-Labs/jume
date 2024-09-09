@@ -1,5 +1,6 @@
 package;
 
+import jume.events.ResizeEventTests;
 import jume.di.ServicesTests;
 import jume.di.InjectableTests;
 import jume.events.EventTests;
@@ -18,6 +19,7 @@ class UnitTests {
     runner.addCase(new EventTests());
     runner.addCase(new EventListenerTests());
     runner.addCase(new EventsTests());
+    runner.addCase(new ResizeEventTests());
 
     Report.create(runner);
 

@@ -4,7 +4,7 @@ import utest.Assert;
 import utest.Test;
 
 class EventTests extends Test {
-  function testConstructor() {
+  function testEventGetter() {
     final event = TestEvent.get(TestEvent.TEST, 'test name', 42);
 
     Assert.equals(TestEvent.TEST, event.type);
