@@ -9,4 +9,3 @@
 -D headless
 
 --js tests/out/tests.js
---cmd node tests/out/tests.js

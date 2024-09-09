@@ -6,11 +6,5 @@
   "haxecheckstyle.sourceFolders": [
     "src",
     "tests"
-  ],
-  "haxeTestExplorer.testCommand": [
-    "${haxe}",
-    "hxml/test.hxml",
-    "-lib",
-    "test-adapter"
   ]
 }

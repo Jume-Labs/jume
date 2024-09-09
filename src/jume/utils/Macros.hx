@@ -204,7 +204,7 @@ function buildEvent(): Array<Field> {
           event = new $typePath();
         }
         event.reset($a{paramNames});
-        jume.di.Services.get(jume.events.Events).send(event);
+        jume.di.Services.get(jume.events.Events).sendEvent(event);
       },
       ret: macro : Void
     })

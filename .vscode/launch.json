@@ -3,9 +3,10 @@
 	"configurations": [
 		{
 			"name": "Debug Tests",
-			"type": "haxe-eval",
+			"type": "node",
 			"request": "launch",
-			"args": ["hxml/test.hxml", "--lib", "test-adapter"]
+      "program": "${workspaceFolder}/tests/out/tests.js",
+      "preLaunchTask": "Debug Tests"
 		}
 	]
 }
