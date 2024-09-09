@@ -93,7 +93,7 @@ class EventsTests extends Test {
     final listener3 = events.addListener({ type: TestEvent.TEST, callback: cb });
     events.sendEvent(TestEvent.get(TestEvent.TEST, 'cancel test'));
 
-    Assert.equals('ccancel test', result1);
+    Assert.equals('cancel test', result1);
     Assert.equals('', result2);
     Assert.equals('', result3);
 
