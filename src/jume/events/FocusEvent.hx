@@ -7,10 +7,10 @@ class FocusEvent extends Event {
   /**
    * This event is triggered when the window gets focus.
    */
-  public static final FOCUSED: EventType<FocusEvent> = 'jume_focused_event';
+  public static final HAS_FOCUS: EventType<FocusEvent> = 'jume_has_focus_event';
 
   /**
    * This event is triggered when the window loses focus.
    */
-  public static final UNFOCUSED: EventType<FocusEvent> = 'jume_unfocused_event';
+  public static final LOST_FOCUS: EventType<FocusEvent> = 'jume_lost_focus_event';
 }
