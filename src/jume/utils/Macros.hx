@@ -1,5 +1,6 @@
 package jume.utils;
 
+import haxe.macro.Compiler;
 import haxe.macro.Expr;
 import haxe.macro.Expr.FunctionArg;
 #if macro
@@ -8,6 +9,15 @@ import haxe.macro.Expr.Field;
 import haxe.macro.Expr.Function;
 
 using haxe.macro.Tools;
+
+function init() {
+  Compiler.registerCustomMetadata({
+    metadata: ':inject',
+    doc: 'Inject the service of this type.',
+    targets: [ClassField],
+    platforms: [Js]
+  }, 'jume');
+}
 
 function inject(): Array<Field> {
   // Get all the fields in the event class.

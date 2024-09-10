@@ -1,6 +1,10 @@
 -cp src
 -cp build
+
 --js dist/jume.js
+
 --debug
+
+--macro jume.utils.Macros.init()
 
 --main Build

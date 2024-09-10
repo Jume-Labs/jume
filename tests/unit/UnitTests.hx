@@ -1,5 +1,8 @@
 package;
 
+import jume.view.ViewTests;
+import jume.view.ScaleModesTests;
+import jume.utils.BitsetTests;
 import jume.di.InjectableTests;
 import jume.di.ServicesTests;
 import jume.events.EventListenerTests;
@@ -40,7 +43,11 @@ class UnitTests {
     runner.addCase(new Vec2Tests());
     runner.addCase(new Vec3Tests());
 
+    runner.addCase(new BitsetTests());
     runner.addCase(new TimeStepTests());
+
+    runner.addCase(new ScaleModesTests());
+    runner.addCase(new ViewTests());
 
     Report.create(runner);
 
