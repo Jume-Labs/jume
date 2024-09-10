@@ -8,7 +8,7 @@
 
 --debug
 -D headless
--D UTEST_PATTERN=TimeStepTests
+# -D UTEST_PATTERN=TimeStepTests
 
 --js tests/out/tests.js
 --cmd node tests/out/tests.js
