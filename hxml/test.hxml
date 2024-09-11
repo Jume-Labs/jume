@@ -5,6 +5,8 @@
 
 --main UnitTests
 
+--macro jume.utils.Macros.init()
+
 --debug
 -D headless
 # -D UTEST_PATTERN=TimeStepTests
