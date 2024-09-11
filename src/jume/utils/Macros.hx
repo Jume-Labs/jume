@@ -1,14 +1,9 @@
 package jume.utils;
 
-import haxe.display.Display.MetadataTarget;
-import haxe.display.Display.Platform;
-import haxe.macro.Compiler;
-import haxe.macro.Expr;
-import haxe.macro.Expr.FunctionArg;
 #if macro
+import haxe.macro.Compiler;
 import haxe.macro.Context;
-import haxe.macro.Expr.Field;
-import haxe.macro.Expr.Function;
+import haxe.macro.Expr;
 
 using haxe.macro.Tools;
 
@@ -16,8 +11,8 @@ function init() {
   Compiler.registerCustomMetadata({
     metadata: ':inject',
     doc: 'Inject the service of this type.',
-    targets: [MetadataTarget.ClassField],
-    platforms: [Platform.Js]
+    targets: [ClassField],
+    platforms: [Js]
   }, 'jume');
 }
 

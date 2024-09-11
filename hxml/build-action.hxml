@@ -1,0 +1,8 @@
+-cp src
+-cp build
+
+--js dist/jume.js
+
+--debug
+
+--main Build
