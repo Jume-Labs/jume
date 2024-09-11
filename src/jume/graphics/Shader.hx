@@ -22,7 +22,7 @@ class Shader implements Injectable {
    * The rendering context.
    */
   @:inject
-  final context: Context;
+  var context: Context;
 
   /**
    * Create a new Shader.
