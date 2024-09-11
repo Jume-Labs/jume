@@ -26,7 +26,7 @@ jobs:
       run: haxe hxml/lint.hxml
 
     - name: Build
-      run: haxe hxml/build-action.hxml
+      run: haxe hxml/build.hxml
 
     - name: Tests
       run: haxe hxml/test.hxml
