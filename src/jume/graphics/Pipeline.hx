@@ -1,14 +1,13 @@
 package jume.graphics;
 
-import jume.graphics.gl.Context;
-import jume.graphics.gl.BlendOperation;
-import jume.graphics.gl.BlendMode;
-
 import js.html.webgl.GL;
 import js.html.webgl.Program;
 import js.html.webgl.UniformLocation;
 
 import jume.di.Injectable;
+import jume.graphics.gl.BlendMode;
+import jume.graphics.gl.BlendOperation;
+import jume.graphics.gl.Context;
 
 /**
  * The pipeline class to store and use shaders.

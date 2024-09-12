@@ -139,6 +139,7 @@ class MathUtils {
    * @param out Optional vector to store the result in.
    * @return The rotated result.
    */
+  @SuppressWarnings('checkstyle:ParameterNumber')
   public static function rotateAround(cl: Class<Math>, pos: Vec2, center: Vec2, angle: Float, ?out: Vec2): Vec2 {
     out ??= Vec2.get();
 
@@ -164,6 +165,7 @@ class MathUtils {
    * @param out The intersection point.
    * @return True if the lines intersect.
    */
+  @SuppressWarnings('checkstyle:ParameterNumber')
   public static function linesIntersect(cl: Class<Math>, p1Start: Vec2, p1End: Vec2, p2Start: Vec2, p2End: Vec2,
       ?out: Vec2): Bool {
     final b = p1End - p1Start;

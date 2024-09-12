@@ -1,5 +1,6 @@
 package;
 
+import jume.graphics.bitmapFont.FontDataTests;
 import jume.view.ViewTests;
 import jume.view.ScaleModesTests;
 import jume.utils.BitsetTests;
@@ -25,16 +26,24 @@ import utest.ui.Report;
 class UnitTests {
   static function main() {
     final runner = new Runner();
+
+    // di
     runner.addCase(new InjectableTests());
     runner.addCase(new ServicesTests());
 
+    // events
     runner.addCase(new EventTests());
     runner.addCase(new EventListenerTests());
     runner.addCase(new EventsTests());
     runner.addCase(new ResizeEventTests());
 
+    // graphics
     runner.addCase(new ColorTests());
 
+    // graphics.bitmapFont
+    runner.addCase(new FontDataTests());
+
+    // math
     runner.addCase(new Mat4Tests());
     runner.addCase(new MathUtilsTests());
     runner.addCase(new RandomTests());
@@ -43,9 +52,11 @@ class UnitTests {
     runner.addCase(new Vec2Tests());
     runner.addCase(new Vec3Tests());
 
+    // utils
     runner.addCase(new BitsetTests());
     runner.addCase(new TimeStepTests());
 
+    // view
     runner.addCase(new ScaleModesTests());
     runner.addCase(new ViewTests());
 

@@ -143,7 +143,7 @@
       "type": "ParameterNumber",
       "props": {
         "severity": "WARNING",
-        "max": 4,
+        "max": 5,
         "ignoreOverriddenMethods": false
       }
     },
