@@ -1,9 +1,11 @@
 package jume.tweens;
 
+import jume.di.Service;
+
 /**
  * The tween manager class.
  */
-class Tweens {
+class Tweens implements Service {
   /**
    * All tweens updated by the manager.
    */
@@ -189,6 +191,23 @@ class Tweens {
 
     for (tween in tweensToRemove) {
       current.remove(tween);
+    }
+  }
+
+  /**
+   * Clear all the tween that are active.
+   */
+  public function clearTweens() {
+    while (current.length > 0) {
+      current.pop();
+    }
+
+    while (sequences.length > 0) {
+      sequences.pop();
+    }
+
+    while (completed.length > 0) {
+      completed.pop();
     }
   }
 }

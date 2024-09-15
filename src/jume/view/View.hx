@@ -51,6 +51,11 @@ typedef ViewParams = {
  */
 class View implements Service {
   /**
+   * If true debug render systems and components.
+   */
+  public var debugRender: Bool;
+
+  /**
    * The ratio between physical pixels and logical pixels.
    */
   public final pixelRatio: Int;

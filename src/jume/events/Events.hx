@@ -30,6 +30,11 @@ typedef AddListenerParams<T> = {
    * Optional extra filter before the callback receives and event.
    */
   var ?filter: (T)->Bool;
+
+  /**
+   * Is this a game wide event, not tied to a scene.
+   */
+  var ?global: Bool;
 }
 
 /**
@@ -55,7 +60,8 @@ class Events implements Service {
       callback: params.callback,
       canCancel: params.canCancel ?? true,
       priority: params.priority ?? 0,
-      filter: params.filter
+      filter: params.filter,
+      global: params.global ?? false
     });
 
     if (listeners[params.type] == null) {
@@ -119,6 +125,23 @@ class Events implements Service {
     }
 
     event.put();
+  }
+
+  /**
+   * Clear all events.
+   * @param clearGlobal Also clear global events.
+   */
+  public function clearEvents(clearGlobal = false) {
+    for (key in listeners.keys()) {
+      final list = listeners[key];
+      var index = list.length - 1;
+      while (index >= 0) {
+        final listener = list[index];
+        if (!listener.global || clearGlobal) {
+          list.remove(listener);
+        }
+      }
+    }
   }
 
   /**

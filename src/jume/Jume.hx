@@ -1,5 +1,16 @@
 package jume;
 
+import jume.events.SceneEvent;
+import jume.math.Random;
+import jume.audio.Audio;
+import jume.graphics.RenderTarget;
+import jume.view.View;
+import jume.utils.TimeStep;
+import jume.input.Input;
+import jume.graphics.Graphics;
+import jume.graphics.gl.Context;
+import jume.ecs.Scene;
+
 import haxe.Timer;
 
 import jume.events.FocusEvent;
@@ -40,6 +51,20 @@ class Jume {
    */
   final events: Events;
 
+  final context: Context;
+
+  final graphics: Graphics;
+
+  final input: Input;
+
+  final timeStep: TimeStep;
+
+  final view: View;
+
+  var target: RenderTarget;
+
+  var scene: Scene;
+
   /**
    * Create a new Jume instance.
    * @param options The game options.
@@ -77,6 +102,31 @@ class Jume {
     events = new Events();
     Services.add(events);
 
+    context = new Context(options.canvasId, options.forceWebGL1);
+    Services.add(context);
+
+    view = new View({
+      width: options.designSize.widthi,
+      height: options.designSize.heighti,
+      pixelRatio: pixelRatio,
+      pixelFilter: options.pixelFilter,
+      isFullScreen: isFullScreen,
+      targetFps: options.targetFps,
+      canvasId: options.canvasId
+    });
+    Services.add(view);
+
+    input = new Input(options.canvasId);
+    Services.add(input);
+
+    timeStep = new TimeStep();
+    Services.add(timeStep);
+
+    Services.add(new Audio());
+    Services.add(new Random());
+
+    graphics = new Graphics(context, view);
+
     #if !headless
     canvas.focus();
     canvas.addEventListener('blur', () -> lostFocus());
@@ -85,7 +135,10 @@ class Jume {
     #end
   }
 
-  public function launch() {
+  public function launch(sceneType: Class<Scene>) {
+    events.addListener({ type: SceneEvent.CHANGE, callback: onSceneChange });
+    changeScene(sceneType);
+
     #if headless
     prevTime = Timer.stamp();
     Timer.delay(headlessLoop, Std.int(1.0 / 60.0 * 1000));
@@ -138,4 +191,17 @@ class Jume {
   }
 
   function render() {}
+
+  function onSceneChange(event: SceneEvent) {
+    changeScene(event.sceneType);
+    event.canceled = true;
+  }
+
+  function changeScene(sceneType: Class<Scene>) {
+    if (scene != null) {
+      scene.destroy();
+    }
+
+    scene = Type.createInstance(sceneType, []);
+  }
 }

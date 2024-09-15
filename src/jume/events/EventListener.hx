@@ -28,6 +28,11 @@ typedef EventListenerParams = {
    * Extra filter before receiving an event.
    */
   var ?filter: (Dynamic)->Bool;
+
+  /**
+   * Is this a game wide event, not tied to a scene.
+   */
+  var global: Bool;
 }
 
 /**
@@ -65,6 +70,11 @@ class EventListener {
   public final filter: (Dynamic)->Bool;
 
   /**
+   * Is this a game wide event, not tied to a scene.
+   */
+  public final global: Bool;
+
+  /**
    * Create a new EventListener instance.
    * @param params The listener input params.
    */
@@ -75,5 +85,6 @@ class EventListener {
     canCancel = params.canCancel;
     priority = params.priority;
     filter = params.filter;
+    global = params.global;
   }
 }
