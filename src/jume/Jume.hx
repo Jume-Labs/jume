@@ -1,29 +1,37 @@
 package jume;
 
-import jume.events.SceneEvent;
-import jume.math.Random;
-import jume.audio.Audio;
-import jume.graphics.RenderTarget;
-import jume.view.View;
-import jume.utils.TimeStep;
-import jume.input.Input;
-import jume.graphics.Graphics;
-import jume.graphics.gl.Context;
-import jume.ecs.Scene;
-
 import haxe.Timer;
 
-import jume.events.FocusEvent;
-import jume.di.Services;
-
-import haxe.Exception;
-
-import js.html.CanvasElement;
 import js.Browser;
 
-import jume.utils.BrowserInfo.isMobile;
-import jume.events.Events;
 import jume.JumeOptions.setDefaultJumeOptions;
+import jume.assets.Assets;
+import jume.assets.AtlasLoader;
+import jume.assets.BitmapFontLoader;
+import jume.assets.ImageLoader;
+import jume.assets.ShaderLoader;
+import jume.assets.SoundLoader;
+import jume.assets.TextLoader;
+import jume.assets.TilesetLoader;
+import jume.audio.Audio;
+import jume.di.Services;
+import jume.ecs.Scene;
+import jume.events.Events;
+import jume.events.FocusEvent;
+import jume.events.ResizeEvent;
+import jume.events.SceneEvent;
+import jume.graphics.Color;
+import jume.graphics.Graphics;
+import jume.graphics.RenderTarget;
+import jume.graphics.gl.Context;
+import jume.input.Input;
+import jume.math.Mat4;
+import jume.math.Random;
+import jume.math.Size;
+import jume.math.Vec2;
+import jume.utils.BrowserInfo.isMobile;
+import jume.utils.TimeStep;
+import jume.view.View;
 
 class Jume {
   /**
@@ -65,6 +73,8 @@ class Jume {
 
   var scene: Scene;
 
+  var tempPos: Vec2;
+
   /**
    * Create a new Jume instance.
    * @param options The game options.
@@ -105,6 +115,8 @@ class Jume {
     context = new Context(options.canvasId, options.forceWebGL1);
     Services.add(context);
 
+    tempPos = new Vec2();
+
     view = new View({
       width: options.designSize.widthi,
       height: options.designSize.heighti,
@@ -126,6 +138,12 @@ class Jume {
     Services.add(new Random());
 
     graphics = new Graphics(context, view);
+
+    final assets = new Assets();
+    addAssetLoaders(assets);
+
+    target = new RenderTarget(new Size(view.viewWidth, view.viewHeight), view.pixelFilter ? NEAREST : LINEAR,
+      view.pixelFilter ? NEAREST : LINEAR);
 
     #if !headless
     canvas.focus();
@@ -153,14 +171,42 @@ class Jume {
   public function hasFocus() {
     inFocus = true;
     FocusEvent.send(FocusEvent.HAS_FOCUS);
+    scene.hasFocus();
   }
 
   public function lostFocus() {
     inFocus = false;
     FocusEvent.send(FocusEvent.LOST_FOCUS);
+    scene.lostFocus();
   }
 
-  function resize(width: Int, height: Int) {}
+  function addAssetLoaders(assets: Assets) {
+    assets.registerLoader(new AtlasLoader());
+    assets.registerLoader(new BitmapFontLoader());
+    assets.registerLoader(new ImageLoader());
+    assets.registerLoader(new ShaderLoader());
+    assets.registerLoader(new SoundLoader());
+    assets.registerLoader(new TextLoader());
+    assets.registerLoader(new TilesetLoader());
+  }
+
+  function resize(width: Int, height: Int) {
+    final ratio = view.pixelRatio;
+    if (view.isFullScreen) {
+      final canvas = view.canvas;
+      canvas.width = width * ratio;
+      canvas.height = height * ratio;
+      canvas.style.width = '${width}px';
+      canvas.style.height = '${height}px';
+      view.scaleToFit();
+
+      target = new RenderTarget(new Size(view.viewWidth, view.viewHeight), view.pixelFilter ? NEAREST : LINEAR,
+        view.pixelFilter ? NEAREST : LINEAR);
+    }
+
+    ResizeEvent.send(ResizeEvent.RESIZE, width * ratio, height * ratio);
+    scene.resize(width * ratio, height * ratio);
+  }
 
   function headlessLoop() {
     final now = Timer.stamp();
@@ -184,13 +230,35 @@ class Jume {
         dt = MAX_DT;
       }
 
+      timeStep.update(dt);
+      scene.update(timeStep.dt);
+
       #if !headless
       render();
       #end
     }
   }
 
-  function render() {}
+  function render() {
+    graphics.transform.identity();
+    graphics.pushTarget(target);
+
+    scene.render(graphics);
+
+    graphics.popTarget();
+
+    // TOdO: Draw fps and memory here.
+
+    graphics.transform.identity();
+    graphics.color.copyFrom(Color.WHITE);
+
+    Mat4.fromScale(view.viewScaleX, view.viewScaleY, 1, graphics.transform);
+
+    graphics.start();
+    tempPos.set(0, 0);
+    graphics.drawRenderTarget(tempPos, target);
+    graphics.present();
+  }
 
   function onSceneChange(event: SceneEvent) {
     changeScene(event.sceneType);

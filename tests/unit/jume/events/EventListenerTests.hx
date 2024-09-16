@@ -12,7 +12,8 @@ class EventListenerTests extends Test {
       callback: callback,
       canCancel: true,
       priority: 2,
-      filter: filter
+      filter: filter,
+      global: true
     });
 
     Assert.isTrue(listener.active);
@@ -21,5 +22,6 @@ class EventListenerTests extends Test {
     Assert.isTrue(listener.canCancel);
     Assert.equals(2, listener.priority);
     Assert.equals(filter, listener.filter);
+    Assert.isTrue(listener.global);
   }
 }

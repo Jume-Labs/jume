@@ -76,7 +76,7 @@ class Scene {
     systems.render(graphics);
   }
 
-  public function resize() {
+  public function resize(width: Int, height: Int) {
     for (camera in cameras) {
       camera.resize();
     }
