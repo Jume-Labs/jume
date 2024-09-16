@@ -1,5 +1,9 @@
 package jume;
 
+import haxe.Exception;
+
+import js.html.CanvasElement;
+
 import haxe.Timer;
 
 import js.Browser;
