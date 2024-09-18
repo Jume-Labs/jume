@@ -151,7 +151,7 @@ class Jume {
     canvas.focus();
     canvas.addEventListener('blur', () -> lostFocus());
     canvas.addEventListener('focus', () -> hasFocus());
-    Browser.window.addEventListener('resize', ()->resize(Browser.window.innerWidth, Browser.window.innerHeight));
+    Browser.window.addEventListener('resize', () -> resize(Browser.window.innerWidth, Browser.window.innerHeight));
     #end
   }
 
