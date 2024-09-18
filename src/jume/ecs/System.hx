@@ -1,5 +1,6 @@
 package jume.ecs;
 
+import jume.di.Injectable;
 import jume.view.Camera;
 import jume.graphics.Graphics;
 
@@ -17,7 +18,7 @@ typedef EntityList = {
   var ?removeCallback: (entity: Entity)->Void;
 }
 
-class System {
+class System implements Injectable {
   public final order: Int;
 
   public var active: Bool;
@@ -71,6 +72,10 @@ class System {
 
   public function destroy() {}
 
+  function registerList(list: EntityList) {
+    lists.push(list);
+  }
+
   inline function getSystem<T: System>(systemType: Class<T>): T {
     final name = Type.getClassName(systemType);
     return cast systems[name];
@@ -82,11 +87,18 @@ class System {
   }
 
   function hasAny(entity: Entity, list: EntityList): Bool {
-    if (list.components != null) {
-      return entity.hasComponents(list.components);
-    } else {
-      return (list.renderables != null && entity.getRenderComponents().length > 0)
-        || (list.updatables != null && entity.getUpdateComponents().length > 0);
+    if (list.components != null && !entity.hasComponents(list.components)) {
+      return false;
     }
+
+    if (list.renderables != null && list.renderables && entity.getRenderComponents().length == 0) {
+      return false;
+    }
+
+    if (list.updatables != null && list.updatables && entity.getUpdateComponents().length == 0) {
+      return false;
+    }
+
+    return true;
   }
 }

@@ -1,12 +1,13 @@
 package jume.ecs;
 
+import jume.di.Injectable;
 import jume.ecs.Component.ComponentParams;
 
 import haxe.Exception;
 
 using jume.math.MathUtils;
 
-class Entity {
+class Entity implements Injectable {
   public final id: Int;
 
   public var active: Bool;
@@ -48,6 +49,10 @@ class Entity {
   public inline function removeComponent(componentType: Class<Component>): Bool {
     componentsUpdated = true;
     return components.remove(componentType);
+  }
+
+  public inline function getComponent<T: Component>(componentType: Class<T>): T {
+    return components.get(componentType);
   }
 
   public inline function hasComponent(componentType: Class<Component>): Bool {

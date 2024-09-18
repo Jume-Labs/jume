@@ -117,12 +117,7 @@ class Random implements Service {
     min = Math.clamp(min, 0, 1);
     max = Math.clamp(max, 0, 1);
     final alpha = rndAlpha ? float(min, max) : 1;
-    return new Color({
-      red: float(min, max),
-      green: float(min, max),
-      blue: float(min, max),
-      alpha: alpha
-    });
+    return new Color(float(min, max), float(min, max), float(min, max), alpha);
   }
 
   /**

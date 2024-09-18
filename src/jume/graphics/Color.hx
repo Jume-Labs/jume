@@ -5,13 +5,6 @@ using jume.math.MathUtils;
 /**
  * Generic color parameter type used in the color functions.
  */
-typedef ColorParams<T> = {
-  var ?red: T;
-  var ?green: T;
-  var ?blue: T;
-  var ?alpha: T;
-}
-
 /**
  * RGBA color class.
  */
@@ -56,19 +49,14 @@ class Color {
    * @param out Optional color to store the result in. If null a new color will be created.
    * @return The created color.
    */
-  public static function fromBytes(colors: ColorParams<Int>, ?out: Color): Color {
+  public static function fromBytes(red = 0, green = 0, blue = 0, alpha = 255, ?out: Color): Color {
     out ??= new Color();
 
-    final r = Math.clampInt(colors.red ?? 0, 0, 255) / 255.0;
-    final g = Math.clampInt(colors.green ?? 0, 0, 255) / 255.0;
-    final b = Math.clampInt(colors.blue ?? 0, 0, 255) / 255.0;
-    final a = Math.clampInt(colors.alpha ?? 255, 0, 255) / 255.0;
-    out.set({
-      red: r,
-      green: g,
-      blue: b,
-      alpha: a
-    });
+    final r = Math.clampInt(red ?? 0, 0, 255) / 255.0;
+    final g = Math.clampInt(green ?? 0, 0, 255) / 255.0;
+    final b = Math.clampInt(blue ?? 0, 0, 255) / 255.0;
+    final a = Math.clampInt(alpha ?? 255, 0, 255) / 255.0;
+    out.set(r, g, b, a);
 
     return out;
   }
@@ -86,12 +74,7 @@ class Color {
     final b = hex & 255;
     final a = (hex >> 24) & 255;
 
-    Color.fromBytes({
-      red: r,
-      green: g,
-      blue: b,
-      alpha: a
-    }, out);
+    Color.fromBytes(r, g, b, a, out);
 
     return out;
   }
@@ -112,12 +95,7 @@ class Color {
       final b = Std.parseInt('0x${regex.matched(4)}');
       final a = Std.parseInt('0x${regex.matched(1)}');
 
-      Color.fromBytes({
-        red: r,
-        green: g,
-        blue: b,
-        alpha: a
-      }, out);
+      Color.fromBytes(r, g, b, a, out);
 
       return out;
     }
@@ -155,15 +133,8 @@ class Color {
    * @param blue The blue channel value (0 - 1). 
    * @param alpha The alpha channel value (0 - 1).
    */
-  public function new(?colors: ColorParams<Float>) {
-    if (colors == null) {
-      red = 0;
-      green = 0;
-      blue = 0;
-      alpha = 1;
-    } else {
-      set(colors);
-    }
+  public function new(red = 0.0, green = 0.0, blue = 0.0, alpha = 0.0) {
+    set(red, green, blue, alpha);
   }
 
   /**
@@ -173,11 +144,11 @@ class Color {
    * @param blue The blue channel value (0 - 1). 
    * @param alpha The alpha channel value (0 - 1).
    */
-  public function set(colors: ColorParams<Float>) {
-    red = colors.red ?? 0;
-    green = colors.green ?? 0;
-    blue = colors.blue ?? 0;
-    alpha = colors.alpha ?? 1;
+  public function set(red: Float, green: Float, blue: Float, alpha = 1.0) {
+    this.red = red;
+    this.green = green;
+    this.blue = blue;
+    this.alpha = alpha;
   }
 
   /**
@@ -187,12 +158,7 @@ class Color {
    */
   public function clone(?out: Color): Color {
     out ??= new Color();
-    out.set({
-      red: red,
-      green: green,
-      blue: blue,
-      alpha: alpha
-    });
+    out.set(red, green, blue, alpha);
 
     return out;
   }

@@ -125,19 +125,9 @@ class Graphics implements Service implements Injectable {
     this.context = context;
     this.view = view;
 
-    color = new Color({
-      red: 1,
-      green: 1,
-      blue: 1,
-      alpha: 1
-    });
+    color = new Color(1, 1, 1, 1);
 
-    clearColor = new Color({
-      red: 0,
-      green: 0,
-      blue: 0,
-      alpha: 1
-    });
+    clearColor = new Color(0, 0, 0, 1);
 
     transformStack = [new Mat4()];
     targetStack = [];

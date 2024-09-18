@@ -105,12 +105,7 @@ class Image {
     }
 
     final pos = x * 4 + y * width * 4;
-    out.set({
-      red: data[pos] / 255,
-      green: data[pos + 1] / 255,
-      blue: data[pos + 2] / 255,
-      alpha: data[pos + 3] / 255
-    });
+    out.set(data[pos] / 255, data[pos + 1] / 255, data[pos + 2] / 255, data[pos + 3] / 255);
 
     return out;
   }

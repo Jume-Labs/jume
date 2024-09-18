@@ -1,11 +1,13 @@
 package jume.ecs;
 
+import jume.di.Injectable;
+
 typedef ComponentParams = {
   var ?_entityId: Int;
   var ?_components: ComponentContainer;
 }
 
-class Component {
+class Component implements Injectable {
   public final entityId: Int;
 
   final components: ComponentContainer;

@@ -14,11 +14,6 @@ import jume.math.Size;
 import jume.math.Vec2;
 import jume.math.Vec3;
 
-typedef Flip = {
-  var x: Bool;
-  var y: Bool;
-}
-
 /**
  * Renders images and frame buffers.
  */
