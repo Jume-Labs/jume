@@ -133,7 +133,7 @@ class Color {
    * @param blue The blue channel value (0 - 1). 
    * @param alpha The alpha channel value (0 - 1).
    */
-  public function new(red = 0.0, green = 0.0, blue = 0.0, alpha = 0.0) {
+  public function new(red = 0.0, green = 0.0, blue = 0.0, alpha = 1.0) {
     set(red, green, blue, alpha);
   }
 
