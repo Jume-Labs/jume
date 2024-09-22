@@ -11,7 +11,7 @@ class ImageLoader extends AssetLoader<Image> {
     super(Image);
   }
 
-  public override function load(id: String, path: String, callback: (asset: Image)->Void, ?props: Dynamic,
+  public override function load(id: String, path: String, callback: (asset: Image) -> Void, ?props: Dynamic,
       ?keep: Bool) {
     keep ??= true;
     final element = Browser.document.createImageElement();

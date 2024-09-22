@@ -73,7 +73,7 @@ typedef ScaleModeParams = {
 /**
  * The scale mode function blueprint.
  */
-typedef ScaleMode = (params: ScaleModeParams)->ScaleModeReturn;
+typedef ScaleMode = (params: ScaleModeParams) -> ScaleModeReturn;
 
 /**
  * Scale the view to fit the canvas. Will cut off parts of the view to make it fit. Keeps aspect ratio.

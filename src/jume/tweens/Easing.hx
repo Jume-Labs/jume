@@ -3,7 +3,7 @@ package jume.tweens;
 /**
  * Ease function type with five float parameters and a float return type.
  */
-typedef Ease = (time: Float, begin: Float, change: Float, duration: Float)->Float;
+typedef Ease = (time: Float, begin: Float, change: Float, duration: Float) -> Float;
 
 /**
  * Two times PI. 

@@ -35,7 +35,7 @@ class AssetLoader<T> implements Injectable {
    * @param props Optional extra props needed to load the asset.
    * @param keep Should the asset be stored.
    */
-  public function load(id: String, path: String, callback: (asset: T)->Void, ?props: Dynamic, ?keep: Bool) {}
+  public function load(id: String, path: String, callback: (asset: T) -> Void, ?props: Dynamic, ?keep: Bool) {}
 
   /**
    * Add an asset to this loaded that was loaded externally.

@@ -18,7 +18,7 @@ class ShaderLoader extends AssetLoader<Shader> {
     super(Shader);
   }
 
-  public override function load(id: String, path: String, callback: (asset: Shader)->Void, ?props: Dynamic,
+  public override function load(id: String, path: String, callback: (asset: Shader) -> Void, ?props: Dynamic,
       ?keep: Bool) {
     keep ??= true;
     final extension = Path.extension(path);

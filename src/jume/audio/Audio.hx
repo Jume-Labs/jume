@@ -289,7 +289,7 @@ class Audio implements Service {
    * @param buffer The audio buffer to decode.
    * @param callback The function to call when the decoding is complete.
    */
-  public function decodeSound(name: String, buffer: ArrayBuffer, callback: (sound: Sound)->Void) {
+  public function decodeSound(name: String, buffer: ArrayBuffer, callback: (sound: Sound) -> Void) {
     #if !headless
     context.decodeAudioData(buffer).then((data) -> {
       if (data != null) {

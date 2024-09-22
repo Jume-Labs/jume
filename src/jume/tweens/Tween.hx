@@ -116,17 +116,17 @@ class Tween implements Injectable {
   /**
    * Function to call when the tween is complete.
    */
-  var onComplete: ()->Void;
+  var onComplete: () -> Void;
 
   /**
    * The function to call every update.
    */
-  var onUpdate: (target: Dynamic)->Void;
+  var onUpdate: (target: Dynamic) -> Void;
 
   /**
    * Called when a tween starts after a delay.
    */
-  var onStart: ()->Void;
+  var onStart: () -> Void;
 
   /**
    * The delay before the tween starts.
@@ -221,7 +221,7 @@ class Tween implements Injectable {
    * @param callback The callback function.
    * @return This tween.
    */
-  public inline function setOnComplete(callback: ()->Void): Tween {
+  public inline function setOnComplete(callback: () -> Void): Tween {
     onComplete = callback;
 
     return this;
@@ -232,7 +232,7 @@ class Tween implements Injectable {
    * @param callback The callback function.
    * @return This tween.
    */
-  public inline function setOnUpdate(callback: (target: Dynamic)->Void): Tween {
+  public inline function setOnUpdate(callback: (target: Dynamic) -> Void): Tween {
     onUpdate = callback;
 
     return this;
@@ -243,7 +243,7 @@ class Tween implements Injectable {
    * @param callback The callback function.
    * @return This tween
    */
-  public inline function setOnStart(callback: ()->Void): Tween {
+  public inline function setOnStart(callback: () -> Void): Tween {
     onStart = callback;
 
     return this;

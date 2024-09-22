@@ -9,8 +9,8 @@ typedef EntityList = {
   var ?components: Array<Class<Component>>;
   var ?updatables: Bool;
   var ?renderables: Bool;
-  var ?addCallback: (entity: Entity)->Void;
-  var ?removeCallback: (entity: Entity)->Void;
+  var ?addCallback: (entity: Entity) -> Void;
+  var ?removeCallback: (entity: Entity) -> Void;
 }
 
 class System implements Injectable {

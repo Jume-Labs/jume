@@ -14,7 +14,7 @@ typedef AddListenerParams<T> = {
   /**
    * The function to call when the event is triggered.
    */
-  var callback: (T)->Void;
+  var callback: (T) -> Void;
 
   /**
    * If true the callback can cancel the event so it doesn't trigger handlers lower in the list.
@@ -29,7 +29,7 @@ typedef AddListenerParams<T> = {
   /**
    * Optional extra filter before the callback receives and event.
    */
-  var ?filter: (T)->Bool;
+  var ?filter: (T) -> Bool;
 
   /**
    * Is this a game wide event, not tied to a scene.

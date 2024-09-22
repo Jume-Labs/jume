@@ -11,7 +11,7 @@ class BitmapFontLoader extends AssetLoader<BitmapFont> {
     super(BitmapFont);
   }
 
-  public override function load(id: String, path: String, callback: (asset: BitmapFont)->Void, ?props: Dynamic,
+  public override function load(id: String, path: String, callback: (asset: BitmapFont) -> Void, ?props: Dynamic,
       ?keep: Bool) {
     keep ??= true;
     assets.load({

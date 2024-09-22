@@ -13,7 +13,7 @@ typedef LoadParams<T> = {
   var assetType: Class<T>;
   var id: String;
   var path: String;
-  var callback: (asset: T)->Void;
+  var callback: (asset: T) -> Void;
   var ?props: Dynamic;
   var ?keep: Bool;
 }
@@ -39,7 +39,7 @@ class Assets {
     }
   }
 
-  public function loadAll(items: Array<AssetItem>, callback: ()->Void) {
+  public function loadAll(items: Array<AssetItem>, callback: () -> Void) {
     var loaded = 0;
     for (item in items) {
       load({

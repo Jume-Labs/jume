@@ -21,7 +21,7 @@ class TilesetLoader extends AssetLoader<Tileset> {
     super(Tileset);
   }
 
-  public override function load(id: String, path: String, callback: (asset: Tileset)->Void, ?props: Dynamic,
+  public override function load(id: String, path: String, callback: (asset: Tileset) -> Void, ?props: Dynamic,
       ?keep: Bool) {
     keep ??= true;
 

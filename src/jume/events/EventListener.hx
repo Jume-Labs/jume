@@ -12,7 +12,7 @@ typedef EventListenerParams = {
   /**
    * The function to call when the event is triggered.
    */
-  var callback: (Dynamic)->Void;
+  var callback: (Dynamic) -> Void;
 
   /**
    * Can the callback cancel an event.
@@ -27,7 +27,7 @@ typedef EventListenerParams = {
   /**
    * Extra filter before receiving an event.
    */
-  var ?filter: (Dynamic)->Bool;
+  var ?filter: (Dynamic) -> Bool;
 
   /**
    * Is this a game wide event, not tied to a scene.
@@ -52,7 +52,7 @@ class EventListener {
   /**
    * The function to call when the event is triggered.
    */
-  public final callback: (Dynamic)->Void;
+  public final callback: (Dynamic) -> Void;
 
   /**
    * If true this callback can cancel an event.
@@ -67,7 +67,7 @@ class EventListener {
   /**
    * Extra filter before receiving an event.
    */
-  public final filter: (Dynamic)->Bool;
+  public final filter: (Dynamic) -> Bool;
 
   /**
    * Is this a game wide event, not tied to a scene.
