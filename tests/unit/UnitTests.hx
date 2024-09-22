@@ -18,7 +18,7 @@ import jume.math.RectangleTests;
 import jume.math.SizeTests;
 import jume.math.Vec2Tests;
 import jume.math.Vec3Tests;
-import jume.utils.TimeStepTests;
+import jume.utils.TimeTests;
 
 import utest.Runner;
 import utest.ui.Report;
@@ -54,7 +54,7 @@ class UnitTests {
 
     // utils
     runner.addCase(new BitsetTests());
-    runner.addCase(new TimeStepTests());
+    runner.addCase(new TimeTests());
 
     // view
     runner.addCase(new ScaleModesTests());
