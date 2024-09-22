@@ -5,7 +5,7 @@ import jume.graphics.Graphics;
 import jume.math.Vec2;
 import jume.graphics.Color;
 
-typedef CBoxShapeParams = {
+typedef CBoxShapeOptions = {
   var width: Float;
   var height: Float;
   var ?filled: Bool;
@@ -35,29 +35,29 @@ class CBoxShape extends Component implements Renderable {
 
   var tempRect: Rectangle;
 
-  public function init(params: CBoxShapeParams): CBoxShape {
+  public function init(options: CBoxShapeOptions): CBoxShape {
     strokeColor = new Color(1, 1, 1, 1);
     fillColor = new Color(1, 1, 1, 1);
     anchor = new Vec2(0.5, 0.5);
     tempRect = new Rectangle();
 
-    width = params.width;
-    height = params.height;
-    filled = params.filled ?? false;
-    stroke = params.stroke ?? true;
+    width = options.width;
+    height = options.height;
+    filled = options.filled ?? false;
+    stroke = options.stroke ?? true;
 
-    if (params.strokeColor != null) {
-      strokeColor.copyFrom(params.strokeColor);
+    if (options.strokeColor != null) {
+      strokeColor.copyFrom(options.strokeColor);
     }
 
-    if (params.fillColor != null) {
-      fillColor.copyFrom(params.fillColor);
+    if (options.fillColor != null) {
+      fillColor.copyFrom(options.fillColor);
     }
 
-    strokeWidth = params.strokeWidth ?? 1;
+    strokeWidth = options.strokeWidth ?? 1;
 
-    if (params.anchor != null) {
-      anchor.set(params.anchor.x, params.anchor.y);
+    if (options.anchor != null) {
+      anchor.set(options.anchor.x, options.anchor.y);
     }
 
     return this;

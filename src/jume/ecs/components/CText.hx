@@ -5,7 +5,7 @@ import jume.math.Vec2;
 import jume.graphics.Color;
 import jume.graphics.bitmapFont.BitmapFont;
 
-typedef CTextParams = {
+typedef CTextOptions = {
   var font: BitmapFont;
   var text: String;
   var ?tint: Color;
@@ -27,20 +27,20 @@ class CText extends Component implements Renderable {
 
   var tempPos: Vec2;
 
-  public function init(params: CTextParams): CText {
-    font = params.font;
-    text = params.text;
+  public function init(options: CTextOptions): CText {
+    font = options.font;
+    text = options.text;
 
     anchor = new Vec2(0.5, 0.5);
     tint = new Color(1, 1, 1, 1);
     tempPos = new Vec2();
 
-    if (params.anchor != null) {
-      anchor.set(params.anchor.x, params.anchor.y);
+    if (options.anchor != null) {
+      anchor.set(options.anchor.x, options.anchor.y);
     }
 
-    if (params.tint != null) {
-      tint.copyFrom(params.tint);
+    if (options.tint != null) {
+      tint.copyFrom(options.tint);
     }
 
     return this;

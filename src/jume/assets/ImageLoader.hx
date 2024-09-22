@@ -1,11 +1,12 @@
 package jume.assets;
 
-import js.html.CanvasElement;
 import js.Browser;
+import js.html.CanvasElement;
 import js.lib.Uint8ClampedArray;
 
 import jume.graphics.Image;
 
+@:dox(hide)
 class ImageLoader extends AssetLoader<Image> {
   public function new() {
     super(Image);

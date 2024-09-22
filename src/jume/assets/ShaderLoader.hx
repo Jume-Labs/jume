@@ -1,12 +1,12 @@
 package jume.assets;
 
-import jume.graphics.ShaderType;
-
 import haxe.io.Path;
 
-import jume.graphics.gl.Context;
 import jume.graphics.Shader;
+import jume.graphics.ShaderType;
+import jume.graphics.gl.Context;
 
+@:dox(hide)
 class ShaderLoader extends AssetLoader<Shader> {
   @:inject
   var assets: Assets;

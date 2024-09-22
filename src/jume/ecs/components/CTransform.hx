@@ -5,7 +5,7 @@ import jume.math.Vec2;
 
 using jume.math.MathUtils;
 
-typedef CTransformParams = {
+typedef CTransformOptions = {
   var ?x: Float;
   var ?y: Float;
   var ?rotation: Float;
@@ -33,14 +33,14 @@ class CTransform extends Component {
 
   var tempScale: Vec2;
 
-  public function init(?params: CTransformParams): CTransform {
+  public function init(?options: CTransformOptions): CTransform {
     // @formatter:off
-    params ??= {};
+    options ??= {};
     // @formatter:on
-    position = new Vec2(params.x ?? 0, params.y ?? 0);
-    rotation = params.rotation ?? 0;
-    scale = new Vec2(params.scaleX ?? 1, params.scaleXY ?? 1);
-    parent = params.parent;
+    position = new Vec2(options.x ?? 0, options.y ?? 0);
+    rotation = options.rotation ?? 0;
+    scale = new Vec2(options.scaleX ?? 1, options.scaleXY ?? 1);
+    parent = options.parent;
     matrix = new Mat4();
 
     worldPosition = new Vec2();

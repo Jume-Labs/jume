@@ -4,7 +4,7 @@ import jume.graphics.Color;
 import jume.graphics.Graphics;
 import jume.math.Vec2;
 
-typedef CPolygonShapeParams = {
+typedef CPolygonShapeOptions = {
   var vertices: Array<Vec2>;
   var ?filled: Bool;
   var ?stroke: Bool;
@@ -28,24 +28,24 @@ class CPolygonShape extends Component implements Renderable {
 
   var tempPos: Vec2;
 
-  public function init(params: CPolygonShapeParams): CPolygonShape {
+  public function init(options: CPolygonShapeOptions): CPolygonShape {
     strokeColor = new Color(1, 1, 1, 1);
     fillColor = new Color(1, 1, 1, 1);
 
-    filled = params.filled ?? false;
-    stroke = params.stroke ?? true;
-    vertices = params.vertices;
+    filled = options.filled ?? false;
+    stroke = options.stroke ?? true;
+    vertices = options.vertices;
     tempPos = new Vec2();
 
-    if (params.strokeColor != null) {
-      strokeColor.copyFrom(params.strokeColor);
+    if (options.strokeColor != null) {
+      strokeColor.copyFrom(options.strokeColor);
     }
 
-    if (params.fillColor != null) {
-      fillColor.copyFrom(params.fillColor);
+    if (options.fillColor != null) {
+      fillColor.copyFrom(options.fillColor);
     }
 
-    strokeWidth = params.strokeWidth ?? 1;
+    strokeWidth = options.strokeWidth ?? 1;
 
     return this;
   }

@@ -3,6 +3,7 @@ package jume.assets;
 import jume.graphics.Image;
 import jume.graphics.bitmapFont.BitmapFont;
 
+@:dox(hide)
 class BitmapFontLoader extends AssetLoader<BitmapFont> {
   @:inject
   var assets: Assets;

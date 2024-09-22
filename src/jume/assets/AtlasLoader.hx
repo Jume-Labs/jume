@@ -3,6 +3,7 @@ package jume.assets;
 import jume.graphics.Image;
 import jume.graphics.atlas.Atlas;
 
+@:dox(hide)
 class AtlasLoader extends AssetLoader<Atlas> {
   @:inject
   var assets: Assets;

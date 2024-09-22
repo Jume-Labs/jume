@@ -66,7 +66,7 @@ class Audio implements Service {
   /**
    * Get the master volume or the volume of a channel if you pass in a channel id.
    * @param channelId Optional channel id.
-   * @returns The volume.
+   * @return The volume.
    */
   public function getVolume(?channelId: Int): Float {
     #if !headless
@@ -96,7 +96,7 @@ class Audio implements Service {
   /**
    * Get the number of loops left for a channel.
    * @param channelId The channel id you want the loops from.
-   * @returns The number of loops left.
+   * @return The number of loops left.
    */
   public inline function getLoop(channelId: Int): Int {
     return audioChannels[channelId].loop;
@@ -113,7 +113,7 @@ class Audio implements Service {
 
   /**
    * Get the first free audio channel.
-   * @returns The free channel id or -1 if there are no free channels.
+   * @return The free channel id or -1 if there are no free channels.
    */
   public function getFreeChannel(): Int {
     for (i in 0...audioChannels.length) {
@@ -133,7 +133,7 @@ class Audio implements Service {
    * @param volume The sound volume.
    * @param channelId If not provided the first free channel will be used.
    * @param startTime The start time in milliseconds.
-   * @returns The channel used to play the audio.
+   * @return The channel used to play the audio.
    */
   public function play(sound: Sound, loop = 0, volume = 1.0, channelId = -1, startTime = 0.0): Int {
     #if !headless
@@ -193,7 +193,7 @@ class Audio implements Service {
     return channelId;
   }
 
-  /*
+  /**
    * Stop all audio or a specific channel if provided.
    * @param channelId Optional channel id.
    */

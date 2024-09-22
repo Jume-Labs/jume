@@ -5,6 +5,7 @@ import js.Browser;
 import jume.audio.Audio;
 import jume.audio.Sound;
 
+@:dox(hide)
 class SoundLoader extends AssetLoader<Sound> {
   @:inject
   var audio: Audio;

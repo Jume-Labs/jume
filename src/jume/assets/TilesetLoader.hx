@@ -1,11 +1,11 @@
 package jume.assets;
 
-import jume.graphics.Image;
-
 import haxe.Exception;
 
+import jume.graphics.Image;
 import jume.tilemap.Tileset;
 
+@:dox(hide)
 typedef LoadTilesetProps = {
   var tileWidth: Int;
   var tileHeight: Int;

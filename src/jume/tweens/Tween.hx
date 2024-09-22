@@ -6,7 +6,7 @@ import jume.di.Injectable;
 import jume.graphics.Color;
 import jume.tweens.Easing.Ease;
 import jume.tweens.Easing.easeLinear;
-import jume.utils.TimeStep;
+import jume.utils.Time;
 
 /**
  * Parameters when creating a new tween.
@@ -96,7 +96,7 @@ class Tween implements Injectable {
   /**
    * The time since the tween started in seconds.
    */
-  var time: Float;
+  var timePassed: Float;
 
   /**
    * How long the tween takes to complete in seconds.
@@ -147,7 +147,7 @@ class Tween implements Injectable {
    * The time step service reference.
    */
   @:inject
-  final timeStep: TimeStep;
+  final time: Time;
 
   /**
    * Used for color tweening.
@@ -168,7 +168,7 @@ class Tween implements Injectable {
     repeat = 0;
     timesCompleted = 0;
     paused = false;
-    time = 0;
+    timePassed = 0;
     ease = easeLinear;
     delay = 0;
     delayTime = 0;
@@ -181,7 +181,7 @@ class Tween implements Injectable {
    * Reset this tween completely.
    */
   public function reset() {
-    time = 0;
+    timePassed = 0;
     delayTime = 0;
     timesCompleted = 0;
     paused = false;
@@ -193,7 +193,7 @@ class Tween implements Injectable {
    * Restart a tween from the beginning.
    */
   public function restart() {
-    time = 0;
+    timePassed = 0;
     complete = false;
     started = false;
   }
@@ -202,7 +202,7 @@ class Tween implements Injectable {
    * Reset just the time passed.
    */
   public function resetTime() {
-    time = 0;
+    timePassed = 0;
   }
 
   /**
@@ -288,7 +288,7 @@ class Tween implements Injectable {
     if (onComplete != null) {
       onComplete();
     }
-    time = 0;
+    timePassed = 0;
   }
 
   /**
@@ -301,7 +301,7 @@ class Tween implements Injectable {
     }
 
     if (ignoreTimescale) {
-      dt = timeStep.unscaledDt;
+      dt = time.unscaledDt;
     }
 
     if (delayTime < delay) {
@@ -314,8 +314,8 @@ class Tween implements Injectable {
         }
       }
 
-      time += dt;
-      if (time >= duration) {
+      timePassed += dt;
+      if (timePassed >= duration) {
         complete = true;
       }
 
@@ -366,14 +366,14 @@ class Tween implements Injectable {
    */
   function updateProperty(data: TweenProperty) {
     if (Std.isOfType(data.start, Color)) {
-      final factor = ease(time, 0, 1, duration);
+      final factor = ease(timePassed, 0, 1, duration);
       Color.interpolate(cast data.start, cast data.end, factor, tempColor);
       if (complete) {
         tempColor.copyFrom(cast data.end);
       }
       Reflect.setProperty(target, data.propertyName, tempColor);
     } else {
-      var value = ease(time, data.start, data.change, duration);
+      var value = ease(timePassed, data.start, data.change, duration);
       if (complete) {
         value = data.end;
       }
@@ -382,6 +382,6 @@ class Tween implements Injectable {
   }
 
   inline function get_percentageComplete(): Float {
-    return (time / duration) * 100;
+    return (timePassed / duration) * 100;
   }
 }

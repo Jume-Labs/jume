@@ -32,9 +32,12 @@ import jume.math.Random;
 import jume.math.Size;
 import jume.math.Vec2;
 import jume.utils.BrowserInfo.isMobile;
-import jume.utils.TimeStep;
+import jume.utils.Time;
 import jume.view.View;
 
+/**
+ * The main engine class.
+ */
 class Jume {
   /**
    * The maximum delta time possible. To avoid unpredictable behavior delta time is clamped to this.
@@ -61,20 +64,44 @@ class Jume {
    */
   final events: Events;
 
+  /**
+   * Web gl context.
+   */
   final context: Context;
 
+  /**
+   * Rendering functions.
+   */
   final graphics: Graphics;
 
+  /**
+   * Input manager.
+   */
   final input: Input;
 
-  final timeStep: TimeStep;
+  /**
+   * Time manager.
+   */
+  final time: Time;
 
+  /**
+   * View manager.
+   */
   final view: View;
 
+  /**
+   * Main render target.
+   */
   var target: RenderTarget;
 
+  /**
+   * The current active scene.
+   */
   var scene: Scene;
 
+  /**
+   * Temporary position used when rendering the target to the screen.
+   */
   var tempPos: Vec2;
 
   /**
@@ -133,8 +160,8 @@ class Jume {
     input = new Input(options.canvasId);
     Services.add(input);
 
-    timeStep = new TimeStep();
-    Services.add(timeStep);
+    time = new Time();
+    Services.add(time);
 
     Services.add(new Audio());
     Services.add(new Random());
@@ -244,8 +271,8 @@ class Jume {
         dt = MAX_DT;
       }
 
-      timeStep.update(dt);
-      scene.update(timeStep.dt);
+      time.update(dt);
+      scene.update(time.dt);
 
       #if !headless
       render();

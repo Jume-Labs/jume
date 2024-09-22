@@ -7,20 +7,20 @@ class TouchEvent extends Event {
   /**
    * Touch start event type.
    */
-  public static inline final TOUCH_START: EventType<TouchEvent> = 'lumi_touch_start';
+  public static inline final TOUCH_START: EventType<TouchEvent> = 'jume_touch_start';
 
   /**
    * Touch end event type.
    */
-  public static inline final TOUCH_END: EventType<TouchEvent> = 'lumi_touch_end';
+  public static inline final TOUCH_END: EventType<TouchEvent> = 'jume_touch_end';
 
   /**
    * Touch move event type.
    */
-  public static inline final TOUCH_MOVE: EventType<TouchEvent> = 'lumi_touch_move';
+  public static inline final TOUCH_MOVE: EventType<TouchEvent> = 'jume_touch_move';
 
   /**
-   * touch id used.
+   * The touch id used.
    */
   var id: Int;
 

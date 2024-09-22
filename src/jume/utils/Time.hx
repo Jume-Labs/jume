@@ -5,9 +5,9 @@ import jume.di.Service;
 using Lambda;
 
 /**
- * Time step service. Controls delta time and game speed.
+ * Time service. Controls delta time and game speed.
  */
-class TimeStep implements Service {
+class Time implements Service {
   /**
    * This controls the game speed.
    */
@@ -39,7 +39,7 @@ class TimeStep implements Service {
   var deltas: Array<Float>;
 
   /**
-   * Create a new time step instance.
+   * Create a new time instance.
    */
   public function new() {
     timeScale = 1.0;

@@ -8,7 +8,7 @@ import jume.graphics.atlas.AtlasFrame;
 import jume.math.Rectangle;
 import jume.math.Vec2;
 
-typedef CSpriteParams = {
+typedef CSpriteOptions = {
   var atlas: Atlas;
   var frameName: String;
   var ?anchor: { x: Float, y: Float };
@@ -38,25 +38,25 @@ class CSprite extends Component implements Renderable {
 
   var frameRect: Rectangle;
 
-  public function init(params: CSpriteParams): CSprite {
+  public function init(options: CSpriteOptions): CSprite {
     anchor = new Vec2();
     tint = new Color(1, 1, 1, 1);
 
-    flip.x = params.flipX ?? false;
-    flip.y = params.flipY ?? false;
+    flip.x = options.flipX ?? false;
+    flip.y = options.flipY ?? false;
 
     tempPos = new Vec2();
     frameRect = new Rectangle();
 
-    if (params.anchor != null) {
-      anchor.set(params.anchor.x, params.anchor.y);
+    if (options.anchor != null) {
+      anchor.set(options.anchor.x, options.anchor.y);
     }
 
-    if (params.tint != null) {
-      tint.copyFrom(params.tint);
+    if (options.tint != null) {
+      tint.copyFrom(options.tint);
     }
 
-    setFrame(params.frameName, params.atlas);
+    setFrame(options.frameName, options.atlas);
 
     return this;
   }

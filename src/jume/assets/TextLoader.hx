@@ -2,6 +2,7 @@ package jume.assets;
 
 import js.Browser;
 
+@:dox(hide)
 class TextLoader extends AssetLoader<String> {
   public function new() {
     super(String);

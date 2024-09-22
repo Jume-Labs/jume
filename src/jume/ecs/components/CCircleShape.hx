@@ -4,7 +4,7 @@ import jume.graphics.Color;
 import jume.graphics.Graphics;
 import jume.math.Vec2;
 
-typedef CCircleShapeParams = {
+typedef CCircleShapeOptions = {
   var radius: Float;
   var ?segments: Int;
   var ?filled: Bool;
@@ -34,29 +34,29 @@ class CCircleShape extends Component implements Renderable {
 
   var tempPos: Vec2;
 
-  public function init(params: CCircleShapeParams): CCircleShape {
+  public function init(options: CCircleShapeOptions): CCircleShape {
     strokeColor = new Color(1, 1, 1, 1);
     fillColor = new Color(1, 1, 1, 1);
     anchor = new Vec2(0.5, 0.5);
     tempPos = new Vec2();
 
-    radius = params.radius;
-    segments = params.segments ?? 48;
-    filled = params.filled ?? false;
-    stroke = params.stroke ?? true;
+    radius = options.radius;
+    segments = options.segments ?? 48;
+    filled = options.filled ?? false;
+    stroke = options.stroke ?? true;
 
-    if (params.strokeColor != null) {
-      strokeColor.copyFrom(params.strokeColor);
+    if (options.strokeColor != null) {
+      strokeColor.copyFrom(options.strokeColor);
     }
 
-    if (params.fillColor != null) {
-      fillColor.copyFrom(params.fillColor);
+    if (options.fillColor != null) {
+      fillColor.copyFrom(options.fillColor);
     }
 
-    strokeWidth = params.strokeWidth ?? 1;
+    strokeWidth = options.strokeWidth ?? 1;
 
-    if (params.anchor != null) {
-      anchor.set(params.anchor.x, params.anchor.y);
+    if (options.anchor != null) {
+      anchor.set(options.anchor.x, options.anchor.y);
     }
 
     return this;
