@@ -21,7 +21,7 @@ import jume.audio.Sound;
 import jume.di.Injectable;
 import jume.di.Service;
 import jume.di.Services;
-// ecs
+// ecs.
 import jume.ecs.Component;
 import jume.ecs.ComponentContainer;
 import jume.ecs.Entities;
@@ -31,6 +31,18 @@ import jume.ecs.Scene;
 import jume.ecs.System;
 import jume.ecs.Systems;
 import jume.ecs.Updatable;
+// ecs.components.
+import jume.ecs.components.CAnimation;
+import jume.ecs.components.CBoxShape;
+import jume.ecs.components.CCircleShape;
+import jume.ecs.components.CPolygonShape;
+import jume.ecs.components.CSprite;
+import jume.ecs.components.CText;
+import jume.ecs.components.CTilemap;
+import jume.ecs.components.CTransform;
+// ecs.Systems
+import jume.ecs.systems.SRender;
+import jume.ecs.systems.SUpdate;
 // events.
 import jume.events.Event;
 import jume.events.EventListener;

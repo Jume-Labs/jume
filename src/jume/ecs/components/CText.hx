@@ -1,12 +1,11 @@
 package jume.ecs.components;
 
 import jume.graphics.Graphics;
-import jume.ecs.Component.ComponentParams;
 import jume.math.Vec2;
 import jume.graphics.Color;
 import jume.graphics.bitmapFont.BitmapFont;
 
-typedef CTextParams = ComponentParams & {
+typedef CTextParams = {
   var font: BitmapFont;
   var text: String;
   var ?tint: Color;
@@ -28,9 +27,7 @@ class CText extends Component implements Renderable {
 
   var tempPos: Vec2;
 
-  public function new(params: CTextParams) {
-    super(params);
-
+  public function init(params: CTextParams): CText {
     font = params.font;
     text = params.text;
 
@@ -45,6 +42,8 @@ class CText extends Component implements Renderable {
     if (params.tint != null) {
       tint.copyFrom(params.tint);
     }
+
+    return this;
   }
 
   public function cRender(graphics: Graphics) {

@@ -1,11 +1,10 @@
 package jume.ecs.components;
 
-import jume.ecs.Component.ComponentParams;
 import jume.graphics.Color;
 import jume.graphics.Graphics;
 import jume.math.Vec2;
 
-typedef CCircleShapeParams = ComponentParams & {
+typedef CCircleShapeParams = {
   var radius: Float;
   var ?segments: Int;
   var ?filled: Bool;
@@ -35,9 +34,7 @@ class CCircleShape extends Component implements Renderable {
 
   var tempPos: Vec2;
 
-  public function new(params: CCircleShapeParams) {
-    super(params);
-
+  public function init(params: CCircleShapeParams): CCircleShape {
     strokeColor = new Color(1, 1, 1, 1);
     fillColor = new Color(1, 1, 1, 1);
     anchor = new Vec2(0.5, 0.5);
@@ -61,6 +58,8 @@ class CCircleShape extends Component implements Renderable {
     if (params.anchor != null) {
       anchor.set(params.anchor.x, params.anchor.y);
     }
+
+    return this;
   }
 
   public function cRender(graphics: Graphics) {

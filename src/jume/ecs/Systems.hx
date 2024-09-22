@@ -1,14 +1,14 @@
 package jume.ecs;
 
+import jume.di.Injectable;
 import jume.di.Service;
 import jume.graphics.Color;
 import jume.math.Vec2;
 import jume.graphics.Graphics;
-import jume.ecs.System.SystemParams;
 import jume.view.View;
 import jume.view.Camera;
 
-class Systems implements Service {
+class Systems implements Service implements Injectable {
   final systems: Map<String, System>;
 
   final systemList: Array<System>;
@@ -27,11 +27,8 @@ class Systems implements Service {
     tempPos = new Vec2();
   }
 
-  public function add<T: System>(systemType: Class<T>, order: Int, params: SystemParams): T {
-    params._order = order;
-    params._systems = systems;
-
-    final system = Type.createInstance(systemType, [params]);
+  public function add<T: System>(systemType: Class<T>, order: Int): T {
+    final system = Type.createInstance(systemType, [systems, order]);
     final name = Type.getClassName(systemType);
 
     systems[name] = system;

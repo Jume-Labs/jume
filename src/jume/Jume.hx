@@ -146,13 +146,6 @@ class Jume {
 
     target = new RenderTarget(new Size(view.viewWidth, view.viewHeight), view.pixelFilter ? NEAREST : LINEAR,
       view.pixelFilter ? NEAREST : LINEAR);
-
-    #if !headless
-    canvas.focus();
-    canvas.addEventListener('blur', () -> lostFocus());
-    canvas.addEventListener('focus', () -> hasFocus());
-    Browser.window.addEventListener('resize', () -> resize(Browser.window.innerWidth, Browser.window.innerHeight));
-    #end
   }
 
   public function launch(sceneType: Class<Scene>) {
@@ -163,6 +156,12 @@ class Jume {
     prevTime = Timer.stamp();
     Timer.delay(headlessLoop, Std.int(1.0 / 60.0 * 1000));
     #else
+    final canvas = view.canvas;
+    canvas.focus();
+    canvas.addEventListener('blur', () -> lostFocus());
+    canvas.addEventListener('focus', () -> hasFocus());
+    Browser.window.addEventListener('resize', () -> resize(Browser.window.innerWidth, Browser.window.innerHeight));
+
     Browser.window.requestAnimationFrame((time) -> {
       prevTime = Timer.stamp();
       loop(0.016);
@@ -224,6 +223,19 @@ class Jume {
 
     final now = Timer.stamp();
     final passed = now - prevTime;
+    trace(passed);
+    if (view.targetFps != -1) {
+      final interval = 1.0 / view.targetFps;
+      if (passed < interval) {
+        return;
+      }
+      final excess = passed % interval;
+      update((passed - excess));
+      prevTime = now - excess;
+    } else {
+      update(passed);
+      prevTime = now;
+    }
   }
 
   function update(dt: Float) {

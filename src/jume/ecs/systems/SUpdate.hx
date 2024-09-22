@@ -1,15 +1,14 @@
 package jume.ecs.systems;
 
-import jume.ecs.System.SystemParams;
-
 class SUpdate extends System {
   var entities: Array<Entity>;
 
-  public function new(params: SystemParams) {
-    super(params);
+  public function init(): SUpdate {
     entities = [];
 
     registerList({ entities: entities, updatables: true });
+
+    return this;
   }
 
   public override function update(dt: Float) {

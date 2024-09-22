@@ -1,11 +1,10 @@
 package jume.ecs.components;
 
-import jume.ecs.Component.ComponentParams;
 import jume.graphics.Color;
 import jume.graphics.Graphics;
 import jume.math.Vec2;
 
-typedef CPolygonShapeParams = ComponentParams & {
+typedef CPolygonShapeParams = {
   var vertices: Array<Vec2>;
   var ?filled: Bool;
   var ?stroke: Bool;
@@ -29,9 +28,7 @@ class CPolygonShape extends Component implements Renderable {
 
   var tempPos: Vec2;
 
-  public function new(params: CPolygonShapeParams) {
-    super(params);
-
+  public function init(params: CPolygonShapeParams): CPolygonShape {
     strokeColor = new Color(1, 1, 1, 1);
     fillColor = new Color(1, 1, 1, 1);
 
@@ -49,6 +46,8 @@ class CPolygonShape extends Component implements Renderable {
     }
 
     strokeWidth = params.strokeWidth ?? 1;
+
+    return this;
   }
 
   public function cRender(graphics: Graphics) {

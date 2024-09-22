@@ -3,10 +3,9 @@ package jume.ecs.components;
 import jume.math.Rectangle;
 import jume.graphics.Graphics;
 import jume.math.Vec2;
-import jume.ecs.Component.ComponentParams;
 import jume.graphics.Color;
 
-typedef CBoxShapeParams = ComponentParams & {
+typedef CBoxShapeParams = {
   var width: Float;
   var height: Float;
   var ?filled: Bool;
@@ -36,9 +35,7 @@ class CBoxShape extends Component implements Renderable {
 
   var tempRect: Rectangle;
 
-  public function new(params: CBoxShapeParams) {
-    super(params);
-
+  public function init(params: CBoxShapeParams): CBoxShape {
     strokeColor = new Color(1, 1, 1, 1);
     fillColor = new Color(1, 1, 1, 1);
     anchor = new Vec2(0.5, 0.5);
@@ -62,6 +59,8 @@ class CBoxShape extends Component implements Renderable {
     if (params.anchor != null) {
       anchor.set(params.anchor.x, params.anchor.y);
     }
+
+    return this;
   }
 
   public function cRender(graphics: Graphics) {

@@ -1,7 +1,5 @@
 package jume.ecs;
 
-import jume.ecs.Component.ComponentParams;
-
 class ComponentContainer {
   final components: Map<String, Component>;
 
@@ -9,15 +7,18 @@ class ComponentContainer {
 
   final renderables: Array<Renderable>;
 
-  public function new() {
+  final entityId: Int;
+
+  public function new(entityId: Int) {
+    this.entityId = entityId;
     components = new Map<String, Component>();
     updatables = [];
     renderables = [];
   }
 
-  public function add<T: Component>(componentType: Class<T>, params: ComponentParams): T {
+  public function add<T: Component>(componentType: Class<T>): T {
     final name = Type.getClassName(componentType);
-    final component = Type.createInstance(componentType, [params]);
+    final component = Type.createInstance(componentType, [entityId, this]);
     components[name] = component;
 
     if (Std.isOfType(component, Updatable)) {

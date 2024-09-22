@@ -3,11 +3,10 @@ package jume.ecs.components;
 import jume.graphics.Flip;
 import jume.math.Vec2;
 import jume.graphics.Graphics;
-import jume.ecs.Component.ComponentParams;
 import jume.graphics.Color;
 import jume.tilemap.Tileset;
 
-typedef CTilemapParams = ComponentParams & {
+typedef CTilemapParams = {
   var grid: Array<Array<Int>>;
   var tileset: Tileset;
   var ?tint: Color;
@@ -24,8 +23,7 @@ class CTilemap extends Component implements Renderable {
 
   var flip: Flip;
 
-  public function new(params: CTilemapParams) {
-    super(params);
+  public function init(params: CTilemapParams): CTilemap {
     grid = params.grid;
     tileset = params.tileset;
     tint = new Color(1, 1, 1, 1);
@@ -38,6 +36,8 @@ class CTilemap extends Component implements Renderable {
     if (params.tint != null) {
       tint.copyFrom(params.tint);
     }
+
+    return this;
   }
 
   public function getTile(x: Int, y: Int): Int {

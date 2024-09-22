@@ -35,8 +35,8 @@
       }
     },
     "arrowFunctionsPolicy": "around",
-    "functionTypeHaxe3Policy": "none",
-    "functionTypeHaxe4Policy": "none"
+    "functionTypeHaxe3Policy": "around",
+    "functionTypeHaxe4Policy": "around"
   },
   "wrapping": {
     "maxLineLength": 118

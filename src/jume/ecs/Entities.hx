@@ -32,8 +32,8 @@ class Entities implements Service {
     }
   }
 
-  public function add<T: Entity>(entityType: Class<T>, params: Dynamic): T {
-    final entity = Type.createInstance(entityType, [params]);
+  public function add<T: Entity>(entityType: Class<T>): T {
+    final entity = Type.createInstance(entityType, []);
     entities.push(entity);
     systems.updateSystemEntities(entity);
 

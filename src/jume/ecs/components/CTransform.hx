@@ -2,11 +2,10 @@ package jume.ecs.components;
 
 import jume.math.Mat4;
 import jume.math.Vec2;
-import jume.ecs.Component.ComponentParams;
 
 using jume.math.MathUtils;
 
-typedef CTransformParams = ComponentParams & {
+typedef CTransformParams = {
   var ?x: Float;
   var ?y: Float;
   var ?rotation: Float;
@@ -34,9 +33,10 @@ class CTransform extends Component {
 
   var tempScale: Vec2;
 
-  public function new(params: CTransformParams) {
-    super(params);
-
+  public function init(?params: CTransformParams): CTransform {
+    // @formatter:off
+    params ??= {};
+    // @formatter:on
     position = new Vec2(params.x ?? 0, params.y ?? 0);
     rotation = params.rotation ?? 0;
     scale = new Vec2(params.scaleX ?? 1, params.scaleXY ?? 1);
@@ -47,6 +47,8 @@ class CTransform extends Component {
     worldRotation = 0;
     worldScale = new Vec2();
     tempScale = new Vec2();
+
+    return this;
   }
 
   public function updateMatrix() {

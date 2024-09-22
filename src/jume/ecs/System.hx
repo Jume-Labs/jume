@@ -1,13 +1,8 @@
 package jume.ecs;
 
 import jume.di.Injectable;
-import jume.view.Camera;
 import jume.graphics.Graphics;
-
-typedef SystemParams = {
-  var ?_systems: Map<String, System>;
-  var ?_order: Int;
-}
+import jume.view.Camera;
 
 typedef EntityList = {
   var entities: Array<Entity>;
@@ -29,9 +24,9 @@ class System implements Injectable {
 
   final systems: Map<String, System>;
 
-  public function new(params: SystemParams) {
-    order = params._order;
-    systems = params._systems;
+  public function new(systems: Map<String, System>, order: Int) {
+    this.systems = systems;
+    this.order = order;
     lists = [];
     debug = true;
     active = true;

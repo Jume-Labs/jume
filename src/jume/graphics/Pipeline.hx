@@ -89,6 +89,10 @@ class Pipeline implements Injectable {
     this.fragmentShader = fragmentShader;
     program = createProgram(useTexture);
 
+    vertexPositionLocation = 0;
+    vertexColorLocation = 1;
+    vertexUVLocation = 2;
+
     #if !headless
     final projection = context.gl.getUniformLocation(program, 'projectionMatrix');
     if (projection == null) {

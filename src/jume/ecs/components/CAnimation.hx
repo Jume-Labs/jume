@@ -1,12 +1,7 @@
 package jume.ecs.components;
 
-import jume.ecs.Component.ComponentParams;
 import jume.graphics.animation.Animation;
 import jume.graphics.atlas.Atlas;
-
-typedef CAnimationParams = ComponentParams & {
-  var ?animations: Array<Animation>;
-}
 
 class CAnimation extends Component implements Updatable {
   public var isPlaying(default, null): Bool;
@@ -27,17 +22,18 @@ class CAnimation extends Component implements Updatable {
 
   var sprite: CSprite;
 
-  public function new(params: CAnimationParams) {
-    super(params);
+  public function init(anims: Array<Animation>): CAnimation {
     sprite = getComponent(CSprite);
     time = 0;
     animations = new Map<String, Animation>();
 
-    if (params.animations != null) {
-      for (anim in params.animations) {
+    if (anims != null) {
+      for (anim in anims) {
         animations[anim.name] = anim;
       }
     }
+
+    return this;
   }
 
   public function cUpdate(dt: Float) {

@@ -1,6 +1,5 @@
 package jume.ecs.components;
 
-import jume.ecs.Component.ComponentParams;
 import jume.graphics.Color;
 import jume.graphics.Flip;
 import jume.graphics.Graphics;
@@ -9,7 +8,7 @@ import jume.graphics.atlas.AtlasFrame;
 import jume.math.Rectangle;
 import jume.math.Vec2;
 
-typedef CSpriteParams = ComponentParams & {
+typedef CSpriteParams = {
   var atlas: Atlas;
   var frameName: String;
   var ?anchor: { x: Float, y: Float };
@@ -39,8 +38,7 @@ class CSprite extends Component implements Renderable {
 
   var frameRect: Rectangle;
 
-  public function new(params: CSpriteParams) {
-    super(params);
+  public function init(params: CSpriteParams): CSprite {
     anchor = new Vec2();
     tint = new Color(1, 1, 1, 1);
 
@@ -59,6 +57,8 @@ class CSprite extends Component implements Renderable {
     }
 
     setFrame(params.frameName, params.atlas);
+
+    return this;
   }
 
   public function setFrame(frameName: String, ?atlas: Atlas) {

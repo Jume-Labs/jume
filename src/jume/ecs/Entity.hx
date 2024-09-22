@@ -1,9 +1,8 @@
 package jume.ecs;
 
-import jume.di.Injectable;
-import jume.ecs.Component.ComponentParams;
-
 import haxe.Exception;
+
+import jume.di.Injectable;
 
 using jume.math.MathUtils;
 
@@ -31,7 +30,9 @@ class Entity implements Injectable {
     active = true;
     tag = '';
     componentsUpdated = false;
-    components = new ComponentContainer();
+    layerChanged = false;
+    layer = 0;
+    components = new ComponentContainer(id);
   }
 
   public function destroy() {
@@ -39,11 +40,9 @@ class Entity implements Injectable {
     components.destroy();
   }
 
-  public inline function addComponent<T: Component>(componentType: Class<T>, params: ComponentParams): T {
-    params._components = components;
-    params._entityId = id;
+  public inline function addComponent<T: Component>(componentType: Class<T>): T {
     componentsUpdated = true;
-    return components.add(componentType, params);
+    return components.add(componentType);
   }
 
   public inline function removeComponent(componentType: Class<Component>): Bool {

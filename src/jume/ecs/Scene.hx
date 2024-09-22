@@ -1,12 +1,12 @@
 package jume.ecs;
 
+import jume.di.Injectable;
 import jume.di.Services;
-import jume.ecs.System.SystemParams;
 import jume.graphics.Graphics;
 import jume.tweens.Tweens;
 import jume.view.Camera;
 
-class Scene {
+class Scene implements Injectable {
   final cameras: Array<Camera>;
 
   final entities: Entities;
@@ -26,8 +26,8 @@ class Scene {
     Services.add(tweens);
   }
 
-  public inline function addEntity<T: Entity>(entityType: Class<T>, params: Dynamic): T {
-    return this.entities.add(entityType, params);
+  public inline function addEntity<T: Entity>(entityType: Class<T>): T {
+    return this.entities.add(entityType);
   }
 
   public inline function removeEntity(entity: Entity) {
@@ -50,8 +50,8 @@ class Scene {
     entities.removeByTag(tag);
   }
 
-  public inline function addSystem<T: System>(systemType: Class<T>, order: Int, params: SystemParams): T {
-    return systems.add(systemType, order, params);
+  public inline function addSystem<T: System>(systemType: Class<T>, order = 0): T {
+    return systems.add(systemType, order);
   }
 
   public inline function removeSystem(systemType: Class<System>): Bool {
@@ -66,13 +66,13 @@ class Scene {
     return systems.has(systemType);
   }
 
-  public inline function update(dt: Float) {
+  public function update(dt: Float) {
     tweens.update(dt);
     entities.update(dt);
     systems.update(dt);
   }
 
-  public inline function render(graphics: Graphics) {
+  public function render(graphics: Graphics) {
     systems.render(graphics);
   }
 

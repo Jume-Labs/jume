@@ -3,22 +3,20 @@ package jume.ecs.systems;
 import jume.ecs.components.CTransform;
 import jume.graphics.Graphics;
 import jume.view.Camera;
-import jume.ecs.System.SystemParams;
 import jume.view.View;
 
 class SRender extends System {
   var entities: Array<Entity>;
 
-  final layers: Map<Int, Array<Entity>>;
+  var layers: Map<Int, Array<Entity>>;
 
-  final layerTracking: Map<Entity, Int>;
+  var layerTracking: Map<Entity, Int>;
 
   @:inject
   var view: View;
 
-  public function new(params: SystemParams) {
-    super(params);
-
+  public function init(): SRender {
+    entities = [];
     layers = new Map<Int, Array<Entity>>();
     layerTracking = new Map<Entity, Int>();
 
@@ -33,6 +31,8 @@ class SRender extends System {
       removeCallback: entityRemoved,
       components: [CTransform]
     });
+
+    return this;
   }
 
   public override function render(graphics: Graphics, cameras: Array<Camera>) {
@@ -58,9 +58,44 @@ class SRender extends System {
         if (layerEntities.length > 0 && !camera.ignoredLayers.contains(layerNr)) {
           for (entity in layerEntities) {
             final transform = entity.getComponent(CTransform);
+            transform.updateMatrix();
+
+            graphics.pushTransform();
+            graphics.applyTransform(transform.matrix);
+
+            for (comp in entity.getRenderComponents()) {
+              comp.cRender(graphics);
+            }
+
+            graphics.popTransform();
           }
         }
       }
+
+      if (view.debugRender) {
+        for (layerNr in layers.keys()) {
+          final layerEntities = layers[layerNr];
+          if (layerEntities.length > 0 && !camera.ignoredLayers.contains(layerNr)) {
+            for (entity in layerEntities) {
+              final transform = entity.getComponent(CTransform);
+              transform.updateMatrix();
+
+              graphics.pushTransform();
+              graphics.applyTransform(transform.matrix);
+
+              for (comp in entity.getRenderComponents()) {
+                comp.cDebugRender(graphics);
+              }
+
+              graphics.popTransform();
+            }
+          }
+        }
+      }
+
+      graphics.popTransform();
+      graphics.present();
+      graphics.popTarget();
     }
   }
 
