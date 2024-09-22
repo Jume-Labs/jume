@@ -18,8 +18,8 @@ jobs:
     - name: Configure Haxelib
       run: |
         haxelib setup /home/runner/haxe/haxelib/
-        haxelib install formatter
-        haxelib install checkstyle
+        haxelib install formatter 1.16.0
+        haxelib install checkstyle 2.9.0
         haxelib install utest 1.13.2
 
     - name: Linting
