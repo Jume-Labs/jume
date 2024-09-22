@@ -111,7 +111,7 @@ import jume.tweens.TweenSequence;
 // utils.
 import jume.utils.Bitset;
 import jume.utils.BrowserInfo;
-import jume.utils.TimeStep;
+import jume.utils.Time;
 // view.
 import jume.view.ScaleModes;
 import jume.view.View;
