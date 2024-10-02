@@ -3,10 +3,10 @@ package jume.ecs;
 import jume.di.Injectable;
 import jume.di.Service;
 import jume.graphics.Color;
-import jume.math.Vec2;
 import jume.graphics.Graphics;
-import jume.view.View;
+import jume.math.Vec2;
 import jume.view.Camera;
+import jume.view.View;
 
 class Systems implements Service implements Injectable {
   final systems: Map<String, System>;

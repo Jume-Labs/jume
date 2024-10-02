@@ -39,11 +39,13 @@ class CSprite extends Component implements Renderable {
   var frameRect: Rectangle;
 
   public function init(options: CSpriteOptions): CSprite {
-    anchor = new Vec2();
+    anchor = new Vec2(0.5, 0.5);
     tint = new Color(1, 1, 1, 1);
 
-    flip.x = options.flipX ?? false;
-    flip.y = options.flipY ?? false;
+    flip = {
+      x: options.flipX ?? false,
+      y: options.flipY ?? false
+    };
 
     tempPos = new Vec2();
     frameRect = new Rectangle();

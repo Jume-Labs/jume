@@ -1,7 +1,7 @@
 package jume.tilemap;
 
-import jume.math.Vec2;
 import jume.math.Rectangle;
+import jume.math.Vec2;
 
 typedef CollisionTile = {
   var id: Int;
@@ -50,7 +50,7 @@ function generateFromIntGrid(params: GenFromIntGridProps): Array<Rectangle> {
 function isCollisionTile(id: Int, collisionIds: Array<Int>): Bool {
   // If no ids specified every non-empty tile is a collision tile.
   if (collisionIds.length == 0) {
-    return id != -1;
+    return id > 0;
   }
 
   return collisionIds.contains(id);
@@ -129,7 +129,7 @@ function generateColliders(params: GenColliderProps): Array<Rectangle> {
       }
 
       final distX = current.x - start.x + 1;
-      final distY = current.y - start.x + 1;
+      final distY = current.y - start.y + 1;
       final xPos = params.worldX + start.x * params.tileWidth;
       final yPos = params.worldY + start.y * params.tileHeight;
       colliders.push(new Rectangle(xPos, yPos, params.tileWidth * distX, params.tileHeight * distY));

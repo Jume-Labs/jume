@@ -1,11 +1,11 @@
 package jume.view;
 
-import jume.math.Size;
-import jume.graphics.RenderTarget;
-import jume.graphics.Color;
 import jume.di.Injectable;
+import jume.graphics.Color;
+import jume.graphics.RenderTarget;
 import jume.math.Mat4;
 import jume.math.Rectangle;
+import jume.math.Size;
 import jume.math.Vec2;
 
 using jume.math.MathUtils;

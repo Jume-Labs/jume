@@ -169,6 +169,7 @@ class Jume {
     graphics = new Graphics(context, view);
 
     final assets = new Assets();
+    Services.add(assets);
     addAssetLoaders(assets);
 
     target = new RenderTarget(new Size(view.viewWidth, view.viewHeight), view.pixelFilter ? NEAREST : LINEAR,
@@ -250,7 +251,6 @@ class Jume {
 
     final now = Timer.stamp();
     final passed = now - prevTime;
-    trace(passed);
     if (view.targetFps != -1) {
       final interval = 1.0 / view.targetFps;
       if (passed < interval) {
@@ -312,5 +312,6 @@ class Jume {
     }
 
     scene = Type.createInstance(sceneType, []);
+    scene.init();
   }
 }

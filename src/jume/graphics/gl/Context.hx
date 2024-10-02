@@ -1,13 +1,12 @@
 package jume.graphics.gl;
 
-import js.html.webgl.GL;
-
 import haxe.Exception;
 
 import js.Browser;
 import js.html.CanvasElement;
 import js.html.webgl.ContextAttributes;
 import js.html.webgl.GL2;
+import js.html.webgl.GL;
 
 import jume.di.Service;
 

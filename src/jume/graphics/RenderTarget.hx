@@ -1,16 +1,15 @@
 package jume.graphics;
 
-import jume.math.Size;
-import jume.graphics.gl.Context;
-import jume.graphics.gl.TextureWrap;
-import jume.graphics.gl.TextureFilter;
-
 import js.html.webgl.Framebuffer;
 import js.html.webgl.GL;
 import js.html.webgl.Texture;
 
 import jume.di.Injectable;
+import jume.graphics.gl.Context;
+import jume.graphics.gl.TextureFilter;
+import jume.graphics.gl.TextureWrap;
 import jume.math.Mat4;
+import jume.math.Size;
 
 /**
  * A target to render to instead of the screen.

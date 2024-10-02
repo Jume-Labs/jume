@@ -1,13 +1,12 @@
 package jume.graphics;
 
-import jume.graphics.gl.Context;
-
 import haxe.Exception;
 
 import js.html.webgl.GL;
 import js.html.webgl.Shader as WebGLShader;
 
 import jume.di.Injectable;
+import jume.graphics.gl.Context;
 
 /**
  * The shader class is used to create custom shaders.

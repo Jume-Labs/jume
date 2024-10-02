@@ -1,8 +1,8 @@
 package jume.assets;
 
-import jume.di.Injectable;
-
 import haxe.Exception;
+
+import jume.di.Injectable;
 
 /**
  * Generic asset loader that can be extended to load custom asset types.

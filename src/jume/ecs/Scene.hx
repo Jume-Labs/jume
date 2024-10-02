@@ -15,7 +15,7 @@ class Scene implements Injectable {
 
   final tweens: Tweens;
 
-  public function new() {
+  function new() {
     cameras = [new Camera()];
     systems = new Systems(cameras);
     entities = new Entities(systems);
@@ -25,6 +25,8 @@ class Scene implements Injectable {
     Services.add(entities);
     Services.add(tweens);
   }
+
+  public function init() {}
 
   public inline function addEntity<T: Entity>(entityType: Class<T>): T {
     return this.entities.add(entityType);

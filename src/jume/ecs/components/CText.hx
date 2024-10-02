@@ -1,9 +1,9 @@
 package jume.ecs.components;
 
-import jume.graphics.Graphics;
-import jume.math.Vec2;
 import jume.graphics.Color;
+import jume.graphics.Graphics;
 import jume.graphics.bitmapFont.BitmapFont;
+import jume.math.Vec2;
 
 typedef CTextOptions = {
   var font: BitmapFont;

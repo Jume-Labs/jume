@@ -1,5 +1,7 @@
 package jume.assets;
 
+import jume.di.Service;
+
 import haxe.Exception;
 
 /**
@@ -66,7 +68,7 @@ typedef LoadParams<T> = {
 /**
  * The asset manager class.
  */
-class Assets {
+class Assets implements Service {
   /**
    * The asset loaders that are active.
    */

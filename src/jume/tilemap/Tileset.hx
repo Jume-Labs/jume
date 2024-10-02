@@ -2,8 +2,8 @@ package jume.tilemap;
 
 import haxe.Exception;
 
-import jume.math.Rectangle;
 import jume.graphics.Image;
+import jume.math.Rectangle;
 
 class Tileset {
   public final tileWidth: Int;

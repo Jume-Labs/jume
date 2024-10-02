@@ -1,9 +1,9 @@
 package jume.ecs.components;
 
-import jume.graphics.Flip;
-import jume.math.Vec2;
-import jume.graphics.Graphics;
 import jume.graphics.Color;
+import jume.graphics.Flip;
+import jume.graphics.Graphics;
+import jume.math.Vec2;
 import jume.tilemap.Tileset;
 
 typedef CTilemapOptions = {
@@ -67,8 +67,8 @@ class CTilemap extends Component implements Renderable {
     for (y in 0...grid.length) {
       for (x in 0...grid[0].length) {
         final id = grid[y][x];
-        if (id != -1) {
-          final rect = tileset.getRect(id);
+        if (id > 0) {
+          final rect = tileset.getRect(id - 1);
           tempPos.set(x * tileset.tileWidth, y * tileset.tileHeight);
           graphics.drawImageSection(tempPos, rect, tileset.image, flip);
         }

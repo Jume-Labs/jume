@@ -41,6 +41,10 @@ class ShapeRenderer extends BaseRenderer {
   var tempP2: Vec2;
   var tempP3: Vec2;
 
+  var lineP1: Vec2;
+  var lineP2: Vec2;
+  var lineP3: Vec2;
+
   /**
    * Create a new shape renderer.
    * @param context The WebGL context.
@@ -55,6 +59,9 @@ class ShapeRenderer extends BaseRenderer {
     tempP1 = new Vec2();
     tempP2 = new Vec2();
     tempP3 = new Vec2();
+    lineP1 = new Vec2();
+    lineP2 = new Vec2();
+    lineP3 = new Vec2();
 
     #if !headless
     vertexBuffer = context.gl.createBuffer();
@@ -136,7 +143,7 @@ class ShapeRenderer extends BaseRenderer {
    * Draw a solid rectangle.
    * @param rect The rectangle to draw.
    */
-  public inline function drawSolidRect(rect: Rectangle) {
+  public function drawSolidRect(rect: Rectangle) {
     #if debug
     if (currentTransform == null || currentColor == null) {
       trace('current transform or color not set');
@@ -160,7 +167,7 @@ class ShapeRenderer extends BaseRenderer {
    * @param rect The rectangle to draw.
    * @param lineWidth The line width in pixels.
    */
-  public inline function drawRect(rect: Rectangle, lineWidth: Float) {
+  public function drawRect(rect: Rectangle, lineWidth: Float) {
     // top
     tempP1.set(rect.x, rect.y);
     tempP2.set(rect.x + rect.width, rect.y);
@@ -195,37 +202,37 @@ class ShapeRenderer extends BaseRenderer {
     final ddy = scale * dx;
     switch (align) {
       case INSIDE:
-        tempP1.copyFrom(start);
-        tempP2.set(start.x + ddx * 2, start.y + ddy * 2);
-        tempP3.copyFrom(end);
-        drawSolidTriangle(tempP1, tempP2, tempP3);
+        lineP1.copyFrom(start);
+        lineP2.set(start.x + ddx * 2, start.y + ddy * 2);
+        lineP3.copyFrom(end);
+        drawSolidTriangle(lineP1, lineP2, lineP3);
 
-        tempP1.copyFrom(end);
-        tempP2.set(start.x + ddx * 2, start.y + ddy * 2);
-        tempP3.set(end.x + ddx * 2, end.y + ddy * 2);
-        drawSolidTriangle(tempP1, tempP2, tempP3);
+        lineP1.copyFrom(end);
+        lineP2.set(start.x + ddx * 2, start.y + ddy * 2);
+        lineP3.set(end.x + ddx * 2, end.y + ddy * 2);
+        drawSolidTriangle(lineP1, lineP2, lineP3);
 
       case MIDDLE:
-        tempP1.set(start.x + ddx, start.y + ddy);
-        tempP2.set(start.x - ddx, start.y - ddy);
-        tempP3.set(end.x + ddx, end.y + ddy);
-        drawSolidTriangle(tempP1, tempP2, tempP3);
+        lineP1.set(start.x + ddx, start.y + ddy);
+        lineP2.set(start.x - ddx, start.y - ddy);
+        lineP3.set(end.x + ddx, end.y + ddy);
+        drawSolidTriangle(lineP1, lineP2, lineP3);
 
-        tempP1.set(end.x + ddx, end.y + ddy);
-        tempP2.set(start.x - ddx, start.y - ddy);
-        tempP3.set(end.x - ddx, end.y - ddy);
-        drawSolidTriangle(tempP1, tempP2, tempP3);
+        lineP1.set(end.x + ddx, end.y + ddy);
+        lineP2.set(start.x - ddx, start.y - ddy);
+        lineP3.set(end.x - ddx, end.y - ddy);
+        drawSolidTriangle(lineP1, lineP2, lineP3);
 
       case OUTSIDE:
-        tempP1.copyFrom(start);
-        tempP2.set(start.x - ddx * 2, start.y - ddy * 2);
-        tempP3.copyFrom(end);
-        drawSolidTriangle(tempP1, tempP2, tempP3);
+        lineP1.copyFrom(start);
+        lineP2.set(start.x - ddx * 2, start.y - ddy * 2);
+        lineP3.copyFrom(end);
+        drawSolidTriangle(lineP1, lineP2, lineP3);
 
-        tempP1.copyFrom(end);
-        tempP2.set(start.x - ddx * 2, start.y - ddy * 2);
-        tempP3.set(end.x - ddx * 2, end.y - ddy * 2);
-        drawSolidTriangle(tempP1, tempP2, tempP3);
+        lineP1.copyFrom(end);
+        lineP2.set(start.x - ddx * 2, start.y - ddy * 2);
+        lineP3.set(end.x - ddx * 2, end.y - ddy * 2);
+        drawSolidTriangle(lineP1, lineP2, lineP3);
     }
   }
 

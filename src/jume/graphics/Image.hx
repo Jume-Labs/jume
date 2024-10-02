@@ -4,6 +4,7 @@ import js.html.webgl.GL;
 import js.html.webgl.Texture;
 import js.lib.Uint8ClampedArray;
 
+import jume.di.Injectable;
 import jume.graphics.gl.Context;
 import jume.graphics.gl.TextureFilter;
 import jume.graphics.gl.TextureWrap;
@@ -12,7 +13,7 @@ import jume.view.View;
 /**
  * The image class is used to display images.
  */
-class Image {
+class Image implements Injectable {
   /**
    * The image width in pixels.
    */

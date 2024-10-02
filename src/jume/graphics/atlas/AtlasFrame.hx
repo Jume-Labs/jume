@@ -1,7 +1,7 @@
 package jume.graphics.atlas;
 
-import jume.math.Size;
 import jume.math.Rectangle;
+import jume.math.Size;
 
 /**
  * Json data per frame.

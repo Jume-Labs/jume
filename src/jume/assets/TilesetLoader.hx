@@ -5,11 +5,28 @@ import haxe.Exception;
 import jume.graphics.Image;
 import jume.tilemap.Tileset;
 
-@:dox(hide)
+/**
+ * The extra props to load a tileset.
+ */
 typedef LoadTilesetProps = {
+  /**
+   * The width of a single tile in pixels.
+   */
   var tileWidth: Int;
+
+  /**
+   * The height of a single tile in pixels.
+   */
   var tileHeight: Int;
+
+  /**
+   * The space between two tiles in pixels.
+   */
   var spacing: Int;
+
+  /**
+   * The space from the edge of the image to the tiles in pixels.
+   */
   var margin: Int;
 }
 
