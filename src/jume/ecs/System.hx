@@ -4,7 +4,7 @@ import jume.di.Injectable;
 import jume.graphics.Graphics;
 import jume.view.Camera;
 
-typedef EntityList = {
+typedef EntityListener = {
   var entities: Array<Entity>;
   var ?components: Array<Class<Component>>;
   var ?updatables: Bool;
@@ -20,14 +20,14 @@ class System implements Injectable {
 
   public var debug: Bool;
 
-  final lists: Array<EntityList>;
+  final entityListeners: Array<EntityListener>;
 
   final systems: Map<String, System>;
 
   public function new(systems: Map<String, System>, order: Int) {
     this.systems = systems;
     this.order = order;
-    lists = [];
+    entityListeners = [];
     debug = true;
     active = true;
   }
@@ -39,25 +39,25 @@ class System implements Injectable {
   public function debugRender(graphics: Graphics, cameras: Array<Camera>) {}
 
   public function updateEntityLists(entity: Entity, removed: Bool) {
-    for (list in lists) {
+    for (listener in entityListeners) {
       if (removed) {
-        if (list.entities.contains(entity)) {
-          if (list.entities.remove(entity)) {
-            if (list.removeCallback != null) {
-              list.removeCallback(entity);
+        if (listener.entities.contains(entity)) {
+          if (listener.entities.remove(entity)) {
+            if (listener.removeCallback != null) {
+              listener.removeCallback(entity);
             }
           }
         }
       } else {
-        if (!list.entities.contains(entity) && hasAny(entity, list)) {
-          list.entities.push(entity);
-          if (list.addCallback != null) {
-            list.addCallback(entity);
+        if (!listener.entities.contains(entity) && hasAny(entity, listener)) {
+          listener.entities.push(entity);
+          if (listener.addCallback != null) {
+            listener.addCallback(entity);
           }
-        } else if (list.entities.contains(entity) && !hasAny(entity, list)) {
-          if (list.entities.remove(entity)) {
-            if (list.removeCallback != null) {
-              list.removeCallback(entity);
+        } else if (listener.entities.contains(entity) && !hasAny(entity, listener)) {
+          if (listener.entities.remove(entity)) {
+            if (listener.removeCallback != null) {
+              listener.removeCallback(entity);
             }
           }
         }
@@ -67,8 +67,12 @@ class System implements Injectable {
 
   public function destroy() {}
 
-  function registerList(list: EntityList) {
-    lists.push(list);
+  function addEntityListener(listener: EntityListener) {
+    entityListeners.push(listener);
+  }
+
+  function removeEntityListener(listener: EntityListener) {
+    entityListeners.remove(listener);
   }
 
   inline function getSystem<T: System>(systemType: Class<T>): T {
@@ -81,16 +85,16 @@ class System implements Injectable {
     return systems.exists(name);
   }
 
-  function hasAny(entity: Entity, list: EntityList): Bool {
-    if (list.components != null && !entity.hasComponents(list.components)) {
+  function hasAny(entity: Entity, listener: EntityListener): Bool {
+    if (listener.components != null && !entity.hasComponents(listener.components)) {
       return false;
     }
 
-    if (list.renderables != null && list.renderables && entity.getRenderComponents().length == 0) {
+    if (listener.renderables != null && listener.renderables && entity.getRenderComponents().length == 0) {
       return false;
     }
 
-    if (list.updatables != null && list.updatables && entity.getUpdateComponents().length == 0) {
+    if (listener.updatables != null && listener.updatables && entity.getUpdateComponents().length == 0) {
       return false;
     }
 

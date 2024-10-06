@@ -6,7 +6,7 @@ class SUpdate extends System {
   public function init(): SUpdate {
     entities = [];
 
-    registerList({ entities: entities, updatables: true });
+    addEntityListener({ entities: entities, updatables: true });
 
     return this;
   }

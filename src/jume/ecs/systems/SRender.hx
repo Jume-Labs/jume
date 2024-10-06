@@ -24,7 +24,7 @@ class SRender extends System {
       layers[i] = [];
     }
 
-    registerList({
+    addEntityListener({
       entities: entities,
       renderables: true,
       addCallback: entityAdded,
