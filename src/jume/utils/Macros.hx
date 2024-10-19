@@ -7,6 +7,9 @@ import haxe.macro.Expr;
 
 using haxe.macro.Tools;
 
+/**
+ * Add the @:inject metadata for autocomplete.
+ */
 function init() {
   Compiler.registerCustomMetadata({
     metadata: ':inject',
@@ -16,6 +19,10 @@ function init() {
   }, 'jume');
 }
 
+/**
+ * Run the @:inject macro.
+ * @return The updated fields.
+ */
 function inject(): Array<Field> {
   // Get all the fields in the event class.
   final fields = Context.getBuildFields();
@@ -38,7 +45,6 @@ function inject(): Array<Field> {
           final classType = fType.toType().getClass();
           final serviceType = Context.getType('jume.di.Service').getClass();
 
-          //         // Make sure the class to inject implements `Service`.
           var implementsService = false;
           if (classType.interfaces != null) {
             for (interfaceRef in classType.interfaces) {
@@ -48,6 +54,7 @@ function inject(): Array<Field> {
               }
             }
 
+            // Make sure the class to inject implements `Service`.
             if (implementsService) {
               final path = classType.pack.concat([classType.name]);
 

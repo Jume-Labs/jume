@@ -176,6 +176,10 @@ class Jume {
       view.pixelFilter ? NEAREST : LINEAR);
   }
 
+  /**
+   * Launch the game.
+   * @param sceneType The scene to start the game with.
+   */
   public function launch(sceneType: Class<Scene>) {
     events.addListener({ type: SceneEvent.CHANGE, callback: onSceneChange });
     changeScene(sceneType);
@@ -197,18 +201,28 @@ class Jume {
     #end
   }
 
+  /**
+   * Called when the game gets focus.
+   */
   public function hasFocus() {
     inFocus = true;
     FocusEvent.send(FocusEvent.HAS_FOCUS);
     scene.hasFocus();
   }
 
+  /**
+   * Called when the game loses focus.
+   */
   public function lostFocus() {
     inFocus = false;
     FocusEvent.send(FocusEvent.LOST_FOCUS);
     scene.lostFocus();
   }
 
+  /**
+   * Setup the built-in asset loaders.
+   * @param assets The asset manager.
+   */
   function addAssetLoaders(assets: Assets) {
     assets.registerLoader(new AtlasLoader());
     assets.registerLoader(new BitmapFontLoader());
@@ -219,6 +233,11 @@ class Jume {
     assets.registerLoader(new TilesetLoader());
   }
 
+  /**
+   * Called when the browser window size changes.
+   * @param width The window width in pixels.
+   * @param height The window height in pixels.
+   */
   function resize(width: Int, height: Int) {
     final ratio = view.pixelRatio;
     if (view.isFullScreen) {
@@ -237,6 +256,9 @@ class Jume {
     scene.resize(width * ratio, height * ratio);
   }
 
+  /**
+   * Game loop when running in headless mode.
+   */
   function headlessLoop() {
     final now = Timer.stamp();
     final passed = now - prevTime;
@@ -246,6 +268,10 @@ class Jume {
     Timer.delay(headlessLoop, Std.int(1.0 / 60.0 * 1000));
   }
 
+  /**
+   * Game loop when running in browser mode.
+   * @param time not used.
+   */
   function loop(time: Float) {
     Browser.window.requestAnimationFrame(loop);
 
@@ -265,6 +291,10 @@ class Jume {
     }
   }
 
+  /**
+   * The update loop. Updates time and the active scene.
+   * @param dt The time passed since the last update in seconds.
+   */
   function update(dt: Float) {
     if (inFocus || !pauseUnfocused) {
       if (dt > MAX_DT) {
@@ -280,6 +310,9 @@ class Jume {
     }
   }
 
+  /**
+   * The render loop.
+   */
   function render() {
     graphics.transform.identity();
     graphics.pushTarget(target);
@@ -293,19 +326,29 @@ class Jume {
     graphics.transform.identity();
     graphics.color.copyFrom(Color.WHITE);
 
+    // Scale to make the render target fit the screen.
     Mat4.fromScale(view.viewScaleX, view.viewScaleY, 1, graphics.transform);
 
+    // Render the main render target to the screen.
     graphics.start();
     tempPos.set(0, 0);
     graphics.drawRenderTarget(tempPos, target);
     graphics.present();
   }
 
+  /**
+   * Callback for the scene change event.
+   * @param event The scene event.
+   */
   function onSceneChange(event: SceneEvent) {
     changeScene(event.sceneType);
     event.canceled = true;
   }
 
+  /**
+   * Change the current scene.
+   * @param sceneType The new scene to start.
+   */
   function changeScene(sceneType: Class<Scene>) {
     if (scene != null) {
       scene.destroy();

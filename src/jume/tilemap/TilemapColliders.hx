@@ -3,12 +3,15 @@ package jume.tilemap;
 import jume.math.Rectangle;
 import jume.math.Vec2;
 
+/**
+ * Helper to keep track of which tiles have been checked when generating colliders.
+ */
 typedef CollisionTile = {
   var id: Int;
   var checked: Bool;
 };
 
-typedef GenFromIntGridProps = {
+typedef GenFromIntGridParams = {
   var grid: Array<Array<Int>>;
   var worldX: Int;
   var worldY: Int;
@@ -17,7 +20,7 @@ typedef GenFromIntGridProps = {
   var collisionIds: Array<Int>;
 };
 
-typedef GenColliderProps = {
+typedef GenColliderParams = {
   var tiles: Array<Array<CollisionTile>>;
   var worldX: Int;
   var worldY: Int;
@@ -26,7 +29,12 @@ typedef GenColliderProps = {
   var collisionIds: Array<Int>;
 };
 
-function generateFromIntGrid(params: GenFromIntGridProps): Array<Rectangle> {
+/**
+ * Generate colliders from an integer 2d grid.
+ * @param params 
+ * @return Array<Rectangle>
+ */
+function generateFromIntGrid(params: GenFromIntGridParams): Array<Rectangle> {
   final tiles: Array<Array<CollisionTile>> = [];
 
   for (y in 0...params.grid.length) {
@@ -47,6 +55,12 @@ function generateFromIntGrid(params: GenFromIntGridProps): Array<Rectangle> {
   });
 }
 
+/**
+ * Check if a tile is part of the ids that generate colliders.
+ * @param id 
+ * @param collisionIds 
+ * @return Bool
+ */
 function isCollisionTile(id: Int, collisionIds: Array<Int>): Bool {
   // If no ids specified every non-empty tile is a collision tile.
   if (collisionIds.length == 0) {
@@ -56,7 +70,12 @@ function isCollisionTile(id: Int, collisionIds: Array<Int>): Bool {
   return collisionIds.contains(id);
 }
 
-function generateColliders(params: GenColliderProps): Array<Rectangle> {
+/**
+ * Generate the tile colliders.
+ * @param params 
+ * @return Array<Rectangle>
+ */
+function generateColliders(params: GenColliderParams): Array<Rectangle> {
   final colliders: Array<Rectangle> = [];
   final start = Vec2.get();
   final current = Vec2.get();
