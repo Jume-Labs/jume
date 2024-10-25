@@ -31,7 +31,6 @@ import jume.math.Mat4;
 import jume.math.Random;
 import jume.math.Size;
 import jume.math.Vec2;
-import jume.utils.BrowserInfo.isMobile;
 import jume.utils.Time;
 import jume.view.View;
 
@@ -113,9 +112,9 @@ class Jume {
     prevTime = 0;
     inFocus = true;
 
-    final isFullScreen = isMobile() && options.fullScreen;
-    var width = options.canvasSize.widthi;
-    var height = options.canvasSize.heighti;
+    final isFullScreen = options.fullScreen;
+    var width = options.canvasSize.width;
+    var height = options.canvasSize.height;
     var pixelRatio = 1;
 
     pauseUnfocused = options.pauseUnfocused;
@@ -147,8 +146,8 @@ class Jume {
     tempPos = new Vec2();
 
     view = new View({
-      width: options.designSize.widthi,
-      height: options.designSize.heighti,
+      width: options.designSize.width,
+      height: options.designSize.height,
       pixelRatio: pixelRatio,
       pixelFilter: options.pixelFilter,
       isFullScreen: isFullScreen,

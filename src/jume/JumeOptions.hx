@@ -1,7 +1,5 @@
 package jume;
 
-import jume.math.Size;
-
 /**
  * The Jume configuration option.
  */
@@ -14,12 +12,12 @@ typedef JumeOptions = {
   /**
    * The width and height in pixels the game is designed for before scaling.
    */
-  var ?designSize: Size;
+  var ?designSize: { width: Int, height: Int };
 
   /**
    * The html canvas width and height in pixels. If not provided it will be set to the design width and height.
    */
-  var ?canvasSize: Size;
+  var ?canvasSize: { width: Int, height: Int };
 
   /**
    * The id of the html canvas. Default is 'jume'.
@@ -65,8 +63,8 @@ typedef JumeOptions = {
  */
 function setDefaultJumeOptions(options: JumeOptions) {
   options.title ??= 'A Jume Game';
-  options.designSize ??= new Size(800, 600);
-  options.canvasSize ??= options.designSize.clone();
+  options.designSize ??= { width: 800, height: 600 };
+  options.canvasSize ??= { width: 800, height: 600 };
   options.canvasId ??= 'jume';
   options.pauseUnfocused ??= true;
   options.forceWebGL1 ??= false;
