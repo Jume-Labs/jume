@@ -69,10 +69,6 @@ class Tweens implements Service {
     }
 
     for (sequence in sequences) {
-      if (sequence.index > sequence.list.length - 1) {
-        sequence.index = 0;
-      }
-
       final tween = sequence.currentTween;
       tween.update(dt);
       if (tween.complete) {
@@ -85,14 +81,17 @@ class Tweens implements Service {
           tween.runComplete();
           sequence.index++;
 
-          if (sequence.repeat > sequence.timesCompleted || sequence.repeat == -1) {
-            for (seqTween in sequence.list) {
-              seqTween.complete = false;
-              seqTween.resetTime();
+          if (sequence.index == sequence.list.length) {
+            if (sequence.repeat > sequence.timesCompleted || sequence.repeat == -1) {
+              for (seqTween in sequence.list) {
+                seqTween.complete = false;
+                seqTween.resetTime();
+              }
+              sequence.timesCompleted++;
+              sequence.index = 0;
+            } else {
+              sequences.remove(sequence);
             }
-            sequence.timesCompleted++;
-          } else {
-            sequences.remove(sequence);
           }
         }
       }

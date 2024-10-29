@@ -39,7 +39,27 @@ class CAnimation extends Component implements Updatable {
   public function cUpdate(dt: Float) {
     if (isPlaying && anim != null && !isFinished) {
       time += dt;
+      sprite.setFrame(anim.getFrameName(time), anim.atlas);
     }
+  }
+
+  public function play(?name: String) {
+    if (name != null) {
+      anim = animations[name];
+    }
+
+    if (anim != null) {
+      time = 0;
+      isPlaying = true;
+    }
+  }
+
+  public inline function stop() {
+    isPlaying = false;
+  }
+
+  public inline function resume() {
+    isPlaying = true;
   }
 
   inline function get_currentAnim(): String {

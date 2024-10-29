@@ -72,6 +72,6 @@ class TweenSequence {
   }
 
   inline function get_currentTween(): Tween {
-    return list[list.length - 1];
+    return list[index];
   }
 }
