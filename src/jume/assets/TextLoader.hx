@@ -8,7 +8,7 @@ class TextLoader extends AssetLoader<String> {
     super(String);
   }
 
-  public override function load(id: String, path: String, callback: (asset: String) -> Void, ?props: Dynamic,
+  public override function load(id: String, path: String, callback: (asset: String) -> Void, ?options: Dynamic,
       ?keep: Bool) {
     keep ??= true;
     Browser.window.fetch(path).then((response) -> {

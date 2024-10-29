@@ -1,8 +1,8 @@
 package jume.assets;
 
-import jume.di.Service;
-
 import haxe.Exception;
+
+import jume.di.Service;
 
 /**
  * Type used when loading multiple assets at the same time.
@@ -24,9 +24,9 @@ typedef AssetItem = {
   var path: String;
 
   /**
-   * Any additional properties needed to load the assets.
+   * Any additional options needed to load the assets.
    */
-  var ?props: Dynamic;
+  var ?options: Dynamic;
 }
 
 /**
@@ -55,9 +55,9 @@ typedef LoadParams<T> = {
 
   /**
 
-    * Any additional properties needed to load the assets.
+    * Any additional options needed to load the assets.
    */
-  var ?props: Dynamic;
+  var ?options: Dynamic;
 
   /**
    * Should this asset be stored in the manager or not.
@@ -97,7 +97,7 @@ class Assets implements Service {
   public function load<T>(params: LoadParams<T>) {
     final name = Type.getClassName(params.assetType);
     if (loaders.exists(name)) {
-      loaders[name].load(params.id, params.path, params.callback, params.props, params.keep);
+      loaders[name].load(params.id, params.path, params.callback, params.options, params.keep);
     } else {
       throw new Exception('Loader is not registered for type ${name}');
     }
@@ -119,7 +119,7 @@ class Assets implements Service {
         assetType: item.type,
         id: item.id,
         path: item.path,
-        props: item.props,
+        options: item.options,
         callback: (asset) -> {
           loaded++;
 

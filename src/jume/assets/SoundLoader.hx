@@ -14,7 +14,7 @@ class SoundLoader extends AssetLoader<Sound> {
     super(Sound);
   }
 
-  public override function load(id: String, path: String, callback: (asset: Sound) -> Void, ?props: Dynamic,
+  public override function load(id: String, path: String, callback: (asset: Sound) -> Void, ?options: Dynamic,
       ?keep: Bool) {
     keep ??= true;
     Browser.window.fetch(path).then((response) -> {

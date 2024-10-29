@@ -3,21 +3,21 @@ package jume.math;
 /**
  * Small Vec3 class used to convert screen space to gl space.
  */
-abstract Vec3(Array<Float>) from Array<Float> to Array<Float> {
+class Vec3 {
   /**
    * The x position in the vector.
    */
-  public var x(get, set): Float;
+  public var x: Float;
 
   /**
    * The y position in the vector.
    */
-  public var y(get, set): Float;
+  public var y: Float;
 
   /**
    * The z position in the vector.
    */
-  public var z(get, set): Float;
+  public var z: Float;
 
   /**
    * Internal object pool.
@@ -49,17 +49,18 @@ abstract Vec3(Array<Float>) from Array<Float> to Array<Float> {
    * @param z The z position.
    */
   public inline function new(x = 0.0, y = 0.0, z = 0.0) {
-    this = [x, y, z];
+    this.x = x;
+    this.y = y;
+    this.z = z;
   }
 
-  @:op(A == B)
-  public function equals(other): Bool {
-    return this[0] == other[0] && this[1] == other[1] && this[2] == other[2];
-  }
-
-  @:op(A != B)
-  public function nequals(other): Bool {
-    return this[0] != other[0] || this[1] != other[1] || this[2] != other[2];
+  /**
+   * Check if two vectors match.
+   * @param other The vector to compare with.
+   * @return True if the vectors are the same.
+   */
+  public inline function equals(other): Bool {
+    return x == other.x && y == other.y && z == other.z;
   }
 
   /**
@@ -69,9 +70,9 @@ abstract Vec3(Array<Float>) from Array<Float> to Array<Float> {
    * @param z The new z value.
    */
   public function set(x: Float, y: Float, z: Float) {
-    this[0] = x;
-    this[1] = y;
-    this[2] = z;
+    this.x = x;
+    this.y = y;
+    this.z = z;
   }
 
   /**
@@ -88,9 +89,9 @@ abstract Vec3(Array<Float>) from Array<Float> to Array<Float> {
       w = 1.0;
     }
 
-    this[0] = (mat[0] * x + mat[4] * y + mat[8] * z + mat[12]) / w;
-    this[1] = (mat[1] * x + mat[5] * y + mat[9] * z + mat[13]) / w;
-    this[2] = (mat[2] * x + mat[6] * y + mat[10] * z + mat[14]) / w;
+    this.x = (mat[0] * x + mat[4] * y + mat[8] * z + mat[12]) / w;
+    this.y = (mat[1] * x + mat[5] * y + mat[9] * z + mat[13]) / w;
+    this.z = (mat[2] * x + mat[6] * y + mat[10] * z + mat[14]) / w;
 
     return this;
   }
@@ -107,36 +108,6 @@ abstract Vec3(Array<Float>) from Array<Float> to Array<Float> {
    * @return The vector string.
    */
   public inline function toString(): String {
-    return '{ x: ${this[0]}, y: ${this[1]}, z: ${this[2]} }';
-  }
-
-  inline function get_x(): Float {
-    return this[0];
-  }
-
-  inline function set_x(value: Float): Float {
-    this[0] = value;
-
-    return value;
-  }
-
-  inline function get_y(): Float {
-    return this[1];
-  }
-
-  inline function set_y(value: Float): Float {
-    this[1] = value;
-
-    return value;
-  }
-
-  inline function get_z(): Float {
-    return this[2];
-  }
-
-  inline function set_z(value: Float): Float {
-    this[2] = value;
-
-    return value;
+    return '{ x: ${x}, y: ${y}, z: ${z} }';
   }
 }

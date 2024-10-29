@@ -5,7 +5,7 @@ using jume.math.MathUtils;
 /**
  * 2d position class.
  */
-abstract Vec2(Array<Float>) from Array<Float> to Array<Float> {
+class Vec2 {
   /**
    * Left direction to compare with.
    */
@@ -34,12 +34,12 @@ abstract Vec2(Array<Float>) from Array<Float> to Array<Float> {
   /**
    * The x axis position.
    */
-  public var x(get, set): Float;
+  public var x: Float;
 
   /**
    * The y axis position.
    */
-  public var y(get, set): Float;
+  public var y: Float;
 
   /**
    * The x position floored to an int.
@@ -84,7 +84,6 @@ abstract Vec2(Array<Float>) from Array<Float> to Array<Float> {
    * @param b Right side.
    * @return The resulting vector.
    */
-  @:op(A + B)
   public static function addVectors(a: Vec2, b: Vec2): Vec2 {
     return Vec2.get(a.x + b.x, a.y + b.y);
   }
@@ -95,7 +94,6 @@ abstract Vec2(Array<Float>) from Array<Float> to Array<Float> {
    * @param b Right side.
    * @return The resulting vector.
    */
-  @:op(A - B)
   public static function subVectors(a: Vec2, b: Vec2): Vec2 {
     return Vec2.get(a.x - b.x, a.y - b.y);
   }
@@ -106,7 +104,6 @@ abstract Vec2(Array<Float>) from Array<Float> to Array<Float> {
    * @param b Right side.
    * @return The resulting vector.
    */
-  @:op(A * B)
   public static function mulVectors(a: Vec2, b: Vec2): Vec2 {
     return Vec2.get(a.x * b.x, a.y * b.y);
   }
@@ -117,7 +114,6 @@ abstract Vec2(Array<Float>) from Array<Float> to Array<Float> {
    * @param b Right side.
    * @return The resulting vector.
    */
-  @:op(A / B)
   public static function divVectors(a: Vec2, b: Vec2): Vec2 {
     return Vec2.get(a.x / b.x, a.y / b.y);
   }
@@ -138,7 +134,8 @@ abstract Vec2(Array<Float>) from Array<Float> to Array<Float> {
    * @param y The y axis value.
    */
   public inline function new(x = 0.0, y = 0.0) {
-    this = [x, y];
+    this.x = x;
+    this.y = y;
   }
 
   /**
@@ -148,8 +145,8 @@ abstract Vec2(Array<Float>) from Array<Float> to Array<Float> {
    * @return This vector.
    */
   public inline function set(x: Float, y: Float): Vec2 {
-    this[0] = x;
-    this[1] = y;
+    this.x = x;
+    this.y = y;
 
     return this;
   }
@@ -164,7 +161,7 @@ abstract Vec2(Array<Float>) from Array<Float> to Array<Float> {
       out = Vec2.get();
     }
 
-    out.set(this[0], this[1]);
+    out.set(x, y);
 
     return out;
   }
@@ -175,8 +172,8 @@ abstract Vec2(Array<Float>) from Array<Float> to Array<Float> {
    * @return This vector.
    */
   public function copyFrom(other: Vec2): Vec2 {
-    this[0] = other[0];
-    this[1] = other[1];
+    x = other.x;
+    y = other.y;
 
     return this;
   }
@@ -186,19 +183,8 @@ abstract Vec2(Array<Float>) from Array<Float> to Array<Float> {
    * @param other The vector to compare with.
    * @return True if they are equal.
    */
-  @:op(A == B)
   public inline function equals(other: Vec2): Bool {
-    return this[0] == other[0] && this[1] == other[1];
-  }
-
-  /**
-   * Compare two vectors to see if they not are equal.
-   * @param other The vector to compare with.
-   * @return True if they not are equal.
-   */
-  @:op(A != B)
-  public inline function nequals(other: Vec2): Bool {
-    return this[0] != other[0] || this[1] != other[1];
+    return x == other.x && y == other.y;
   }
 
   /**
@@ -206,10 +192,9 @@ abstract Vec2(Array<Float>) from Array<Float> to Array<Float> {
    * @param other The vector to add.
    * @return This vector.
    */
-  @:op(A += B)
   public inline function add(other: Vec2): Vec2 {
-    this[0] += other[0];
-    this[1] += other[1];
+    x += other.x;
+    y += other.y;
 
     return this;
   }
@@ -219,10 +204,9 @@ abstract Vec2(Array<Float>) from Array<Float> to Array<Float> {
    * @param other The vector to subtract.
    * @return This vector.
    */
-  @:op(A -= B)
   public inline function sub(other: Vec2): Vec2 {
-    this[0] -= other[0];
-    this[1] -= other[1];
+    x -= other.x;
+    y -= other.y;
 
     return this;
   }
@@ -232,10 +216,9 @@ abstract Vec2(Array<Float>) from Array<Float> to Array<Float> {
    * @param other The vector to multiply by.
    * @return This vector.
    */
-  @:op(A *= B)
   public inline function mul(other: Vec2): Vec2 {
-    this[0] *= other[0];
-    this[1] *= other[1];
+    x *= other.x;
+    y *= other.y;
 
     return this;
   }
@@ -245,10 +228,9 @@ abstract Vec2(Array<Float>) from Array<Float> to Array<Float> {
    * @param other The vector to divide by.
    * @return This vector.
    */
-  @:op(A /= B)
   public inline function div(other: Vec2): Vec2 {
-    this[0] /= other[0];
-    this[1] /= other[1];
+    x /= other.x;
+    y /= other.y;
 
     return this;
   }
@@ -259,7 +241,7 @@ abstract Vec2(Array<Float>) from Array<Float> to Array<Float> {
    * @return The dot product.
    */
   public inline function dot(other: Vec2): Float {
-    return this[0] * other[0] + this[1] * other[1];
+    return x * other.x + y * other.y;
   }
 
   /**
@@ -267,10 +249,10 @@ abstract Vec2(Array<Float>) from Array<Float> to Array<Float> {
    * @return This vector.
    */
   public function normalize(): Vec2 {
-    final l = this.length;
+    final l = length;
     if (l > 0) {
-      this[0] /= l;
-      this[1] /= l;
+      x /= l;
+      y /= l;
     }
 
     return this;
@@ -288,11 +270,11 @@ abstract Vec2(Array<Float>) from Array<Float> to Array<Float> {
     final c = Math.cos(rad);
     final s = Math.sin(rad);
 
-    final tx = this[0] - centerX;
-    final ty = this[1] - centerY;
+    final tx = x - centerX;
+    final ty = y - centerY;
 
-    this[0] = c * tx + s * ty + x;
-    this[1] = c * ty - s * tx + y;
+    x = c * tx + s * ty + x;
+    y = c * ty - s * tx + y;
 
     return this;
   }
@@ -309,51 +291,31 @@ abstract Vec2(Array<Float>) from Array<Float> to Array<Float> {
    * @return The vector string.
    */
   public inline function toString(): String {
-    return '{ x: ${this[0]}, y: ${this[1]} }';
-  }
-
-  inline function get_x(): Float {
-    return this[0];
-  }
-
-  inline function set_x(value: Float): Float {
-    this[0] = value;
-
-    return value;
-  }
-
-  inline function get_y(): Float {
-    return this[1];
-  }
-
-  inline function set_y(value: Float): Float {
-    this[1] = value;
-
-    return value;
+    return '{ x: ${x}, y: ${y} }';
   }
 
   inline function get_xi(): Int {
-    return Math.floor(this[0]);
+    return Math.floor(x);
   }
 
   inline function get_yi(): Int {
-    return Math.floor(this[1]);
+    return Math.floor(y);
   }
 
   inline function get_length(): Float {
-    return Math.sqrt(this[0] * this[0] + this[1] * this[1]);
+    return Math.sqrt(x * x + y * y);
   }
 
   function set_length(value: Float): Float {
     final l = length;
 
     if (l > 0) {
-      this[0] /= l;
-      this[1] /= l;
+      x /= l;
+      y /= l;
     }
 
-    this[0] *= value;
-    this[1] *= value;
+    x *= value;
+    y *= value;
 
     return value;
   }

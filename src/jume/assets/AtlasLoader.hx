@@ -12,7 +12,7 @@ class AtlasLoader extends AssetLoader<Atlas> {
     super(Atlas);
   }
 
-  public override function load(id: String, path: String, callback: (asset: Atlas) -> Void, ?props: Dynamic,
+  public override function load(id: String, path: String, callback: (asset: Atlas) -> Void, ?options: Dynamic,
       ?keep: Bool) {
     keep ??= true;
     assets.load({

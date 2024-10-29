@@ -110,6 +110,40 @@ function scaleModeFitView(params: ScaleModeParams): ScaleModeReturn {
 }
 
 /**
+ * Scale the view to fit the design resolution.
+ * @param params The scale mode parameters.
+ * @return The scaled values.
+ */
+function scaleModeFitDesign(params: ScaleModeParams): ScaleModeReturn {
+  final designRatio = params.designWidth / params.designHeight;
+  final canvasRatio = params.canvasWidth / params.canvasHeight;
+
+  var viewWidth = 0;
+  var viewHeight = 0;
+  if (canvasRatio > designRatio) {
+    viewWidth = params.designWidth;
+    viewHeight = Math.ceil(viewWidth / canvasRatio);
+  } else {
+    viewHeight = params.designHeight;
+    viewWidth = Math.ceil(viewHeight * canvasRatio);
+  }
+
+  final scaleFactor = params.canvasWidth / viewWidth;
+
+  final offsetX = (params.canvasWidth - params.designWidth * scaleFactor) * params.anchorX;
+  final offsetY = (params.canvasHeight - params.designHeight * scaleFactor) * params.anchorY;
+
+  return {
+    viewWidth: viewWidth,
+    viewHeight: viewHeight,
+    scaleFactorX: scaleFactor,
+    scaleFactorY: scaleFactor,
+    offsetX: offsetX,
+    offsetY: offsetY
+  };
+}
+
+/**
  * Scale the view to fit the width of the canvas. Will cut off parts at the top and bottom to fit. Keeps aspect ratio.
  * @param params The scale mode parameters.
  * @return The scaled values.

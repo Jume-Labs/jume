@@ -32,10 +32,10 @@ class AssetLoader<T> implements Injectable {
    * @param id The id to store it as.
    * @param path The path to the asset.
    * @param callback The function to return the loaded assets in.
-   * @param props Optional extra props needed to load the asset.
+   * @param options Optional extra options needed to load the asset.
    * @param keep Should the asset be stored.
    */
-  public function load(id: String, path: String, callback: (asset: T) -> Void, ?props: Dynamic, ?keep: Bool) {}
+  public function load(id: String, path: String, callback: (asset: T) -> Void, ?options: Dynamic, ?keep: Bool) {}
 
   /**
    * Add an asset to this loaded that was loaded externally.

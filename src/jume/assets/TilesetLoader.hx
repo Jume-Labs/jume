@@ -6,9 +6,9 @@ import jume.graphics.Image;
 import jume.tilemap.Tileset;
 
 /**
- * The extra props to load a tileset.
+ * The extra options to load a tileset.
  */
-typedef LoadTilesetProps = {
+typedef LoadTilesetOptions = {
   /**
    * The width of a single tile in pixels.
    */
@@ -38,19 +38,19 @@ class TilesetLoader extends AssetLoader<Tileset> {
     super(Tileset);
   }
 
-  public override function load(id: String, path: String, callback: (asset: Tileset) -> Void, ?props: Dynamic,
+  public override function load(id: String, path: String, callback: (asset: Tileset) -> Void, ?options: Dynamic,
       ?keep: Bool) {
     keep ??= true;
 
-    if (props == null
-      || props.tileWidth == null
-      || props.tileHeight == null
-      || props.spacing == null
-      || props.margin == null) {
+    if (options == null
+      || options.tileWidth == null
+      || options.tileHeight == null
+      || options.spacing == null
+      || options.margin == null) {
       throw new Exception('Missing properties needed to load the tileset.');
     }
 
-    final tilesetProps: LoadTilesetProps = cast props;
+    final tilesetOptions: LoadTilesetOptions = cast options;
 
     assets.load({
       assetType: Image,
@@ -59,8 +59,8 @@ class TilesetLoader extends AssetLoader<Tileset> {
       keep: keep,
       callback: (image) -> {
         if (image != null) {
-          final tileset = new Tileset(image, tilesetProps.tileWidth, tilesetProps.tileHeight, tilesetProps.spacing,
-            tilesetProps.margin);
+          final tileset = new Tileset(image, tilesetOptions.tileWidth, tilesetOptions.tileHeight,
+            tilesetOptions.spacing, tilesetOptions.margin);
 
           if (keep) {
             loadedAssets[id] = tileset;
