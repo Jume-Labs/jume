@@ -18,7 +18,7 @@ class Vec2Tests extends Test {
   function testAddVectors() {
     final first = new Vec2(20, 30);
     final second = new Vec2(30, 50);
-    final result = first + second;
+    final result = Vec2.addVectors(first, second);
 
     Assert.equals(50, result.x);
     Assert.equals(80, result.y);
@@ -27,7 +27,7 @@ class Vec2Tests extends Test {
   function testSubVectors() {
     final first = new Vec2(50, 100);
     final second = new Vec2(30, 50);
-    final result = first - second;
+    final result = Vec2.subVectors(first, second);
 
     Assert.equals(20, result.x);
     Assert.equals(50, result.y);
@@ -36,7 +36,7 @@ class Vec2Tests extends Test {
   function testMulVectors() {
     final first = new Vec2(10, 20);
     final second = new Vec2(3, 5);
-    final result = first * second;
+    final result = Vec2.mulVectors(first, second);
 
     Assert.equals(30, result.x);
     Assert.equals(100, result.y);
@@ -45,7 +45,7 @@ class Vec2Tests extends Test {
   function testDivVectors() {
     final first = new Vec2(12, 35);
     final second = new Vec2(3, 5);
-    final result = first / second;
+    final result = Vec2.divVectors(first, second);
 
     Assert.equals(4, result.x);
     Assert.equals(7, result.y);
@@ -96,7 +96,7 @@ class Vec2Tests extends Test {
     final clone = vec.clone();
 
     Assert.notEquals(vec, clone);
-    Assert.isTrue(vec == clone);
+    Assert.isTrue(vec.equals(clone));
   }
 
   function testCopyFrom() {
@@ -104,7 +104,7 @@ class Vec2Tests extends Test {
     final vec = new Vec2();
     vec.copyFrom(other);
 
-    Assert.isTrue(vec == other);
+    Assert.isTrue(vec.equals(other));
   }
 
   function testEquals() {
@@ -112,18 +112,18 @@ class Vec2Tests extends Test {
     final two = new Vec2(2, 5);
     final three = new Vec2(4, 9);
 
-    Assert.isTrue(one == two);
-    Assert.isFalse(one == three);
+    Assert.isTrue(one.equals(two));
+    Assert.isFalse(one.equals(three));
 
-    Assert.isTrue(one != three);
-    Assert.isFalse(one != two);
+    Assert.isFalse(one.equals(three));
+    Assert.isTrue(one.equals(two));
   }
 
   function testAdd() {
     final vec = new Vec2(4, 8);
     final other = new Vec2(2, 4);
 
-    vec += other;
+    vec.add(other);
 
     Assert.equals(6, vec.x);
     Assert.equals(12, vec.y);
@@ -136,7 +136,7 @@ class Vec2Tests extends Test {
     final vec = new Vec2(4, 8);
     final other = new Vec2(2, 4);
 
-    vec -= other;
+    vec.sub(other);
 
     Assert.equals(2, vec.x);
     Assert.equals(4, vec.y);
@@ -149,7 +149,7 @@ class Vec2Tests extends Test {
     final vec = new Vec2(4, 8);
     final other = new Vec2(2, 4);
 
-    vec *= other;
+    vec.mul(other);
 
     Assert.equals(8, vec.x);
     Assert.equals(32, vec.y);
@@ -162,7 +162,7 @@ class Vec2Tests extends Test {
     final vec = new Vec2(4, 8);
     final other = new Vec2(2, 4);
 
-    vec /= other;
+    vec.div(other);
 
     Assert.equals(2, vec.x);
     Assert.equals(2, vec.y);
@@ -184,8 +184,8 @@ class Vec2Tests extends Test {
     final vec = new Vec2(20, 10);
     vec.normalize();
 
-    Assert.floatEquals(10, vec.x);
-    Assert.floatEquals(5, vec.y);
+    Assert.floatEquals(0.8944271, vec.x);
+    Assert.floatEquals(0.4472135, vec.y);
   }
 
   function testRotateAround() {

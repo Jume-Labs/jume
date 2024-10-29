@@ -7,17 +7,17 @@ class Vec3Tests extends Test {
   function testNewEmptyVec3() {
     final vec = new Vec3();
 
-    Assert.equals(0.0, vec[0]);
-    Assert.equals(0.0, vec[1]);
-    Assert.equals(0.0, vec[2]);
+    Assert.equals(0.0, vec.x);
+    Assert.equals(0.0, vec.y);
+    Assert.equals(0.0, vec.x);
   }
 
   function testNewValues() {
     final vec = new Vec3(2.3, 3.5, 4.8);
 
-    Assert.equals(2.3, vec[0]);
-    Assert.equals(3.5, vec[1]);
-    Assert.equals(4.8, vec[2]);
+    Assert.equals(2.3, vec.x);
+    Assert.equals(3.5, vec.y);
+    Assert.equals(4.8, vec.z);
   }
 
   function testGettersSetters() {
@@ -50,7 +50,7 @@ class Vec3Tests extends Test {
     final vec2 = new Vec3(2.4, 4.6, 2.8);
 
     Assert.notEquals(vec1, vec2);
-    Assert.isTrue(vec1 == vec2);
+    Assert.isTrue(vec1.equals(vec2));
   }
 
   function testNotEquals() {
@@ -84,9 +84,9 @@ class Vec3Tests extends Test {
 
     vec.transformMat4(10, 20, 30, mat);
 
-    Assert.floatEquals(vec[0], -40.48097);
-    Assert.floatEquals(vec[1], -0.51299469);
-    Assert.floatEquals(vec[2], 30);
+    Assert.floatEquals(vec.x, -40.48097);
+    Assert.floatEquals(vec.y, -0.51299469);
+    Assert.floatEquals(vec.z, 30);
   }
 
   function testToString() {

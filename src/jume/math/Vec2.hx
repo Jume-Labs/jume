@@ -84,7 +84,7 @@ class Vec2 {
    * @param b Right side.
    * @return The resulting vector.
    */
-  public static function addVectors(a: Vec2, b: Vec2): Vec2 {
+  public static inline function addVectors(a: Vec2, b: Vec2): Vec2 {
     return Vec2.get(a.x + b.x, a.y + b.y);
   }
 
@@ -94,7 +94,7 @@ class Vec2 {
    * @param b Right side.
    * @return The resulting vector.
    */
-  public static function subVectors(a: Vec2, b: Vec2): Vec2 {
+  public static inline function subVectors(a: Vec2, b: Vec2): Vec2 {
     return Vec2.get(a.x - b.x, a.y - b.y);
   }
 
@@ -104,7 +104,7 @@ class Vec2 {
    * @param b Right side.
    * @return The resulting vector.
    */
-  public static function mulVectors(a: Vec2, b: Vec2): Vec2 {
+  public static inline function mulVectors(a: Vec2, b: Vec2): Vec2 {
     return Vec2.get(a.x * b.x, a.y * b.y);
   }
 
@@ -114,7 +114,7 @@ class Vec2 {
    * @param b Right side.
    * @return The resulting vector.
    */
-  public static function divVectors(a: Vec2, b: Vec2): Vec2 {
+  public static inline function divVectors(a: Vec2, b: Vec2): Vec2 {
     return Vec2.get(a.x / b.x, a.y / b.y);
   }
 
@@ -124,7 +124,7 @@ class Vec2 {
    * @param b The second vector.
    * @return The distance.
    */
-  public static function distance(a: Vec2, b: Vec2): Float {
+  public static inline function distance(a: Vec2, b: Vec2): Float {
     return Math.sqrt(Math.pow(b.x - a.x, 2) + Math.pow(b.y - a.y, 2));
   }
 

@@ -168,8 +168,12 @@ class MathUtils {
   @SuppressWarnings('checkstyle:ParameterNumber')
   public static function linesIntersect(cl: Class<Math>, p1Start: Vec2, p1End: Vec2, p2Start: Vec2, p2End: Vec2,
       ?out: Vec2): Bool {
-    final b = p1End - p1Start;
-    final d = p2End - p2Start;
+    if (out != null) {
+      out.set(0, 0);
+    }
+
+    final b = Vec2.subVectors(p1End, p1Start);
+    final d = Vec2.subVectors(p2End, p2Start);
 
     var bDotDPerp = b.x * d.y - b.y * d.x;
     if (bDotDPerp == 0) {
@@ -179,7 +183,7 @@ class MathUtils {
       return false;
     }
 
-    final c = p2Start - p1Start;
+    final c = Vec2.subVectors(p2Start, p1Start);
     final t = (c.x * d.y - c.y * d.x) / bDotDPerp;
     if (t < 0 || t > 1) {
       b.put();
@@ -205,7 +209,7 @@ class MathUtils {
       point.add(b);
 
       // Choose the closest hit.
-      if (out == Vec2.ZERO) {
+      if (out.equals(Vec2.ZERO)) {
         out.copyFrom(point);
       } else {
         final p1s = p1Start.clone();

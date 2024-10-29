@@ -353,14 +353,14 @@ class ShapeRenderer extends BaseRenderer {
    */
   function setTransformVertices(p1: Vec3, p2: Vec3, p3: Vec3) {
     final i = index * OFFSET;
-    vertexIndices[i] = p1[0];
-    vertexIndices[i + 1] = p1[1];
+    vertexIndices[i] = p1.x;
+    vertexIndices[i + 1] = p1.y;
     vertexIndices[i + 2] = 0;
-    vertexIndices[i + 7] = p2[0];
-    vertexIndices[i + 8] = p2[1];
+    vertexIndices[i + 7] = p2.x;
+    vertexIndices[i + 8] = p2.y;
     vertexIndices[i + 9] = 0;
-    vertexIndices[i + 14] = p3[0];
-    vertexIndices[i + 15] = p3[1];
+    vertexIndices[i + 14] = p3.x;
+    vertexIndices[i + 15] = p3.y;
     vertexIndices[i + 16] = 0;
   }
 
