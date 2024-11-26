@@ -1,0 +1,10 @@
+-cp src
+-cp build
+
+-D doc-gen
+--no-output
+
+--main Build
+
+--js dist/jume.js
+--xml dist/docs.xml

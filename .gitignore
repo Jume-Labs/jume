@@ -2,3 +2,4 @@
 dist
 dump
 tests/out
+out/
